@@ -1,0 +1,39 @@
+[project]
+name = "ecommerce-operation-assistant-api"
+version = "0.1.0"
+description = "FastAPI backend for Ecommerce Operation Assistant."
+requires-python = ">=3.12"
+dependencies = [
+  "alembic",
+  "celery[redis]",
+  "cryptography",
+  "fastapi",
+  "httpx",
+  "langgraph",
+  "langgraph-checkpoint-postgres",
+  "opentelemetry-api",
+  "opentelemetry-exporter-otlp-proto-http",
+  "opentelemetry-sdk",
+  "psycopg[binary,pool]",
+  "pydantic-settings",
+  "pymysql",
+  "python-multipart",
+  "sqlalchemy",
+  "uvicorn[standard]",
+]
+
+[project.optional-dependencies]
+dev = [
+  "pytest",
+  "ruff",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# 显式把项目根目录加入 sys.path，使 `from app...` 在裸 `pytest` 下也能解析，
+# 避免依赖 venv 是否可编辑安装 app 包（否则 collection 阶段报 ModuleNotFoundError: No module named 'app'）。
+pythonpath = ["."]

@@ -1,0 +1,35 @@
+# Environment
+.env
+.env.local
+
+# Python
+api/.venv/
+**/__pycache__/
+api/.pytest_cache/
+api/.ruff_cache/
+**/*.pyc
+
+# Node
+web/node_modules/
+web/.next/
+# 根级依赖与构建产物（项目根存在独立 package-lock 导致的 node_modules）
+/node_modules/
+/.next/
+# 临时 Playwright 调试脚本
+pw_*.cjs
+
+# Local document rendering and research artifacts
+/tmp/
+web/out/
+web/.env.local
+
+# Uploads
+api/uploads/
+
+# Local runtime logs
+api/.logs/
+web/.logs/
+web/.next-courseware-*.log
+
+# Large offline delivery archives
+deliverables/**/*.tar
