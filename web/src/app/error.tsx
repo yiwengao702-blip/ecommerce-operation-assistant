@@ -14,7 +14,7 @@ export default function Error({
   reset: () => void;
 }) {
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <div className="rounded-lg border border-rose-200 bg-rose-50 p-6">
           <h1 className="text-lg font-semibold text-rose-800">页面加载失败</h1>
@@ -26,13 +26,13 @@ export default function Error({
             <button
               type="button"
               onClick={() => reset()}
-              className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-cyan-700 px-3 text-sm font-medium text-white hover:bg-cyan-800"
+              className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-brand-700 px-3 text-sm font-medium text-white hover:bg-brand-800"
             >
               重试
             </button>
             <Link
               href="/"
-              className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-subtle bg-white px-3 text-sm font-medium text-slate-700 hover:bg-surface-muted"
             >
               返回首页
             </Link>

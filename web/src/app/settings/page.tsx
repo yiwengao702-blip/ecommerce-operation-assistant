@@ -37,7 +37,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
 
   if (!settings) {
     return (
-      <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+      <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
         <div className="mx-auto max-w-5xl">
           <BackLink />
           <div className="mt-6 rounded-md border border-rose-200 bg-rose-50 p-5 text-sm text-rose-700">
@@ -49,13 +49,13 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
   }
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <header className="flex flex-col gap-4 border-b border-slate-200 pb-5 lg:flex-row lg:items-end lg:justify-between">
+        <header className="flex flex-col gap-4 border-b border-border-subtle pb-5 lg:flex-row lg:items-end lg:justify-between">
           <div>
             <BackLink />
-            <p className="mt-5 text-sm font-medium text-emerald-700">Model Settings</p>
-            <h1 className="mt-2 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">
+            <p className="mt-5 text-sm font-medium text-brand-600">Model Settings</p>
+            <h1 className="mt-2 text-2xl font-semibold tracking-normal text-foreground sm:text-3xl">
               模型配置中心
             </h1>
           </div>
@@ -112,7 +112,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
               icon={<Bot className="h-5 w-5" aria-hidden="true" />}
               title="文本模型"
               subtitle="用于诊断、主图方案、视频脚本和复盘。"
-              tone="bg-slate-950"
+              tone="bg-brand-900"
             />
             <div className="mt-5 space-y-4">
               <TextInput
@@ -267,7 +267,7 @@ export default async function SettingsPage({ searchParams }: SettingsPageProps) 
             <button
               type="submit"
               form="model-settings-form"
-              className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-slate-950 px-5 text-sm font-semibold text-white hover:bg-slate-800"
+              className="inline-flex h-11 items-center justify-center gap-2 rounded-md bg-brand-900 px-5 text-sm font-semibold text-white hover:bg-brand-800"
             >
               <KeyRound className="h-4 w-4" aria-hidden="true" />
               保存配置
@@ -301,7 +301,7 @@ function UserManagementPanel({ users }: { users: UserAccount[] }) {
         icon={<Users className="h-5 w-5" aria-hidden="true" />}
         title="用户与权限"
         subtitle="按角色控制编辑、成员管理和投放确认权限"
-        tone="bg-sky-700"
+        tone="bg-brand-700"
       />
 
       <form action="/settings/users/create" method="post" className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr_180px_180px_auto] lg:items-end">
@@ -315,19 +315,19 @@ function UserManagementPanel({ users }: { users: UserAccount[] }) {
             type="password"
             minLength={8}
             placeholder="可留空"
-            className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+            className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
           />
         </label>
         <button
           type="submit"
-          className="inline-flex h-11 items-center justify-center rounded-md bg-slate-950 px-4 text-sm font-semibold text-white hover:bg-slate-800"
+          className="inline-flex h-11 items-center justify-center rounded-md bg-brand-900 px-4 text-sm font-semibold text-white hover:bg-brand-800"
         >
           添加用户
         </button>
       </form>
 
-      <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-        <div className="grid grid-cols-[1fr_120px_120px_1.2fr] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500">
+      <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+        <div className="grid grid-cols-[1fr_120px_120px_1.2fr] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500">
           <span>用户</span>
           <span>角色</span>
           <span>状态</span>
@@ -338,18 +338,18 @@ function UserManagementPanel({ users }: { users: UserAccount[] }) {
             暂无用户。先添加 owner 或 operator，再逐步接入登录鉴权。
           </div>
         ) : (
-          <div className="divide-y divide-slate-200">
+          <div className="divide-y divide-border-subtle">
             {users.map((user) => (
               <div key={user.id} className="grid grid-cols-[1fr_120px_120px_1.2fr] px-4 py-3 text-sm">
                 <div>
-                  <p className="font-medium text-slate-950">{user.display_name}</p>
+                  <p className="font-medium text-foreground">{user.display_name}</p>
                   <p className="mt-1 text-xs text-slate-500">{user.email}</p>
                 </div>
                 <span className="text-slate-700">{roleLabel(user.role)}</span>
                 <span className="text-slate-700">{user.status === "active" ? "启用" : "停用"}</span>
                 <div className="flex flex-wrap gap-1.5">
                   {permissionBadges(user).map((badge) => (
-                    <span key={badge} className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
+                    <span key={badge} className="rounded-md bg-surface-muted px-2 py-1 text-xs text-slate-600">
                       {badge}
                     </span>
                   ))}
@@ -405,7 +405,7 @@ function StatusPill({ label, value, active }: { label: string; value: string; ac
       <p className="text-xs text-slate-500">{label}</p>
       <div className="mt-1 flex items-center gap-2">
         <span className={`h-2 w-2 rounded-full ${active ? "bg-emerald-500" : "bg-slate-300"}`} />
-        <p className="text-sm font-semibold text-slate-900">{value}</p>
+        <p className="text-sm font-semibold text-foreground">{value}</p>
       </div>
     </div>
   );
@@ -447,7 +447,7 @@ function TextInput({
         name={name}
         defaultValue={defaultValue}
         placeholder={placeholder}
-        className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
       />
     </label>
   );
@@ -471,7 +471,7 @@ function NumberInput({
         type="number"
         min="1"
         defaultValue={defaultValue}
-        className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
       />
     </label>
   );
@@ -493,7 +493,7 @@ function ProviderSelect({
       <select
         name={name}
         defaultValue={defaultValue || "dashscope"}
-        className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
       >
         <option value="dashscope">DashScope / 通义万相</option>
         <option value="jimeng">Jimeng / 即梦</option>
@@ -511,7 +511,7 @@ function RoleSelect() {
       <select
         name="role"
         defaultValue="operator"
-        className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
       >
         <option value="owner">Owner</option>
         <option value="operator">Operator</option>
@@ -531,7 +531,7 @@ function SecretInput({ label, name, masked }: { label: string; name: string; mas
         name={name}
         type="password"
         placeholder={masked ? `当前：${masked}，留空则保持不变` : "粘贴 API Key"}
-        className="mt-2 h-11 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
+        className="mt-2 h-11 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-emerald-500 focus:ring-4 focus:ring-emerald-100"
       />
     </label>
   );
@@ -544,7 +544,7 @@ function TestButton({ target, label }: { target: "text" | "image" | "video"; lab
       <input type="hidden" name="target" value={target} />
       <button
         type="submit"
-        className="inline-flex h-11 w-full items-center justify-center gap-2 panel px-5 text-sm font-semibold text-slate-700 hover:bg-slate-50 sm:w-auto"
+        className="inline-flex h-11 w-full items-center justify-center gap-2 panel px-5 text-sm font-semibold text-slate-700 hover:bg-surface-muted sm:w-auto"
       >
         <FlaskConical className="h-4 w-4" aria-hidden="true" />
         {label}

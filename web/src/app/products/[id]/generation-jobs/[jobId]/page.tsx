@@ -29,12 +29,12 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
   const resultUrl = jobResultUrl(job);
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <div className="mx-auto flex max-w-5xl flex-col gap-6">
-        <header className="flex flex-col gap-4 border-b border-slate-200 pb-5">
+        <header className="flex flex-col gap-4 border-b border-border-subtle pb-5">
           <Link
             href={`/products/${product.id}?tab=jobs`}
-            className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950"
+            className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-600 hover:text-foreground"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             返回任务中心
@@ -59,14 +59,14 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
           <section
             className={
               job.status === "cancelled"
-                ? "rounded-md border border-slate-200 bg-white p-4"
+                ? "rounded-md border border-border-subtle bg-white p-4"
                 : "rounded-md border border-rose-200 bg-rose-50 p-4"
             }
           >
             <h2
               className={
                 job.status === "cancelled"
-                  ? "text-sm font-semibold text-slate-950"
+                  ? "text-sm font-semibold text-foreground"
                   : "text-sm font-semibold text-rose-800"
               }
             >
@@ -87,7 +87,7 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
                 <input type="hidden" name="tab" value="jobs" />
                 <button
                   type="submit"
-                  className="inline-flex h-9 items-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+                  className="inline-flex h-9 items-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
                 >
                   <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
                   重试任务
@@ -98,14 +98,14 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
         ) : null}
 
         {job.status === "pending" || job.status === "running" ? (
-          <section className="rounded-md border border-slate-200 bg-white p-4">
-            <h2 className="text-sm font-semibold text-slate-950">任务控制</h2>
+          <section className="rounded-md border border-border-subtle bg-white p-4">
+            <h2 className="text-sm font-semibold text-foreground">任务控制</h2>
             <p className="mt-2 text-sm leading-6 text-slate-600">取消后任务会停止排队或释放运行锁，不会继续生成素材。</p>
             <form action={`/products/${product.id}/generation-jobs/${job.id}/cancel`} method="post" className="mt-4">
               <input type="hidden" name="tab" value="jobs" />
               <button
                 type="submit"
-                className="inline-flex h-9 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                className="inline-flex h-9 items-center gap-2 rounded-md border border-border-subtle bg-white px-3 text-xs font-semibold text-slate-700 hover:bg-surface-muted"
               >
                 取消任务
               </button>
@@ -114,17 +114,17 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
         ) : null}
 
         {resultUrl ? (
-          <section className="rounded-md border border-slate-200 bg-white p-4">
+          <section className="rounded-md border border-border-subtle bg-white p-4">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h2 className="text-sm font-semibold text-slate-950">生成结果</h2>
+                <h2 className="text-sm font-semibold text-foreground">生成结果</h2>
                 <p className="mt-1 break-all text-xs text-slate-500">{resultUrl}</p>
               </div>
               <a
                 href={absoluteMediaUrl(resultUrl)}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                className="inline-flex h-9 shrink-0 items-center gap-2 rounded-md border border-border-subtle bg-white px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
               >
                 <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
                 打开结果
@@ -165,22 +165,22 @@ export default async function GenerationJobDetailPage({ params }: GenerationJobD
 /** 渲染 JobEventTimeline 组件，集中展示任务事件时间线所需的数据、状态和操作入口。 */
 function JobEventTimeline({ job }: { job: GenerationJob }) {
   return (
-    <section className="rounded-md border border-slate-200 bg-white p-4">
+    <section className="rounded-md border border-border-subtle bg-white p-4">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">任务事件</h2>
+          <h2 className="text-sm font-semibold text-foreground">任务事件</h2>
           <p className="mt-1 text-xs text-slate-500">记录入队、开始、失败、重试和完成等生命周期节点</p>
         </div>
-        <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-600">{job.events.length} 条</span>
+        <span className="rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-600">{job.events.length} 条</span>
       </div>
 
       {job.events.length > 0 ? (
         <div className="mt-4 grid gap-2">
           {job.events.map((event) => (
-            <div key={event.id} className="rounded-md border border-slate-200 bg-slate-50 px-3 py-3">
+            <div key={event.id} className="rounded-md border border-border-subtle bg-surface-muted px-3 py-3">
               <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                 <div>
-                  <p className="text-sm font-semibold text-slate-950">{generationJobEventLabel(event.event_type)}</p>
+                  <p className="text-sm font-semibold text-foreground">{generationJobEventLabel(event.event_type)}</p>
                   <p className="mt-1 text-xs text-slate-500">{event.created_at}</p>
                 </div>
                 <span className="w-fit rounded-md bg-white px-2 py-1 text-xs text-slate-600">
@@ -193,7 +193,7 @@ function JobEventTimeline({ job }: { job: GenerationJob }) {
           ))}
         </div>
       ) : (
-        <div className="mt-4 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center text-sm text-slate-500">
+        <div className="mt-4 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-8 text-center text-sm text-slate-500">
           暂无任务事件。新任务会在入队、执行和重试时写入事件。
         </div>
       )}
@@ -204,9 +204,9 @@ function JobEventTimeline({ job }: { job: GenerationJob }) {
 /** 渲染 DetailMetric 组件，集中展示详情指标所需的数据、状态和操作入口。 */
 function DetailMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-md border border-slate-200 bg-white px-4 py-3">
+    <div className="rounded-md border border-border-subtle bg-white px-4 py-3">
       <p className="text-xs text-slate-500">{label}</p>
-      <p className="mt-1 line-clamp-2 text-sm font-semibold text-slate-950">{value}</p>
+      <p className="mt-1 line-clamp-2 text-sm font-semibold text-foreground">{value}</p>
     </div>
   );
 }
@@ -241,9 +241,9 @@ function generationJobStatusLabel(status: GenerationJob["status"]): string {
 /** 渲染 JsonPanel 组件，集中展示json面板所需的数据、状态和操作入口。 */
 function JsonPanel({ title, value }: { title: string; value: unknown }) {
   return (
-    <section className="rounded-md border border-slate-200 bg-white p-4">
-      <h2 className="text-sm font-semibold text-slate-950">{title}</h2>
-      <pre className="mt-3 max-h-[420px] overflow-auto rounded-md bg-slate-950 p-3 text-xs leading-5 text-slate-100">
+    <section className="rounded-md border border-border-subtle bg-white p-4">
+      <h2 className="text-sm font-semibold text-foreground">{title}</h2>
+      <pre className="mt-3 max-h-[420px] overflow-auto rounded-md bg-brand-900 p-3 text-xs leading-5 text-slate-100">
         {JSON.stringify(value, null, 2)}
       </pre>
     </section>
@@ -261,10 +261,10 @@ function JobStatusBadge({ job }: { job: GenerationJob }) {
   };
   const tone: Record<GenerationJob["status"], string> = {
     failed: "bg-rose-50 text-rose-700",
-    pending: "bg-slate-100 text-slate-600",
+    pending: "bg-surface-muted text-slate-600",
     running: "bg-amber-50 text-amber-700",
     succeeded: "bg-emerald-50 text-emerald-700",
-    cancelled: "bg-slate-100 text-slate-500",
+    cancelled: "bg-surface-muted text-slate-500",
   };
 
   return (

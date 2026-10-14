@@ -139,11 +139,11 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
   const canEdit = Boolean(currentUser?.permissions.can_edit);
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <GenerationJobAutoRefresh active={hasActiveGenerationJobs} />
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
-        <header className="flex flex-col gap-4 border-b border-slate-200 pb-5">
-          <Link href="/" className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-600 hover:text-slate-950">
+        <header className="flex flex-col gap-4 border-b border-border-subtle pb-5">
+          <Link href="/" className="inline-flex w-fit items-center gap-2 text-sm font-medium text-slate-600 hover:text-foreground">
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             返回商品池
           </Link>
@@ -153,12 +153,12 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               <p className="text-sm font-medium text-emerald-700">
                 {platformLabels[product.platform]} · {product.category ?? "未分类"}
               </p>
-              <h1 className="mt-2 text-2xl font-semibold tracking-normal text-slate-950 sm:text-3xl">
+              <h1 className="mt-2 text-2xl font-semibold tracking-normal text-foreground sm:text-3xl">
                 {product.name}
               </h1>
               <div className="mt-3 flex flex-wrap gap-2">
                 {product.selling_points.length === 0 ? (
-                  <span className="rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-500">
+                  <span className="rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-500">
                     暂无卖点
                   </span>
                 ) : (
@@ -252,15 +252,15 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 <h2 className="text-lg font-semibold">竞品列表</h2>
                 <p className="mt-1 text-sm text-slate-500">先把市场参照物摆上桌面，后续分析才有抓手</p>
               </div>
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {priceSpread.length > 0
                   ? `价格样本 ${Math.min(...priceSpread)}-${Math.max(...priceSpread)}`
                   : "待补充价格"}
               </span>
             </div>
 
-            <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-              <div className="grid grid-cols-[1.2fr_0.7fr_0.6fr_1.1fr_1fr] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500">
+            <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+              <div className="grid grid-cols-[1.2fr_0.7fr_0.6fr_1.1fr_1fr] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500">
                 <span>竞品</span>
                 <span>平台</span>
                 <span>售价</span>
@@ -273,20 +273,20 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   还没有竞品。建议先录入 3 个同价位或同类目爆款。
                 </div>
               ) : (
-                <div className="divide-y divide-slate-200">
+                <div className="divide-y divide-border-subtle">
                   {product.competitors.map((competitor) => (
                     <div
                       key={competitor.id}
                       className="grid min-h-16 grid-cols-[1.2fr_0.7fr_0.6fr_1.1fr_1fr] items-center px-4 py-3 text-sm"
                     >
                       <div>
-                        <p className="font-medium text-slate-950">{competitor.name}</p>
+                        <p className="font-medium text-foreground">{competitor.name}</p>
                         {competitor.url ? (
                           <a
                             href={competitor.url}
                             target="_blank"
                             rel="noreferrer"
-                            className="mt-1 inline-flex items-center gap-1 text-xs text-sky-700 hover:text-sky-900"
+                            className="mt-1 inline-flex items-center gap-1 text-xs text-brand-700 hover:text-brand-900"
                           >
                             <LinkIcon className="h-3 w-3" aria-hidden="true" />
                             查看链接
@@ -302,7 +302,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       <span className="line-clamp-2 text-slate-600">{competitor.title ?? "-"}</span>
                       <div className="flex flex-wrap gap-1.5">
                         {competitor.selling_points.slice(0, 3).map((point) => (
-                          <span key={point} className="rounded-md bg-sky-50 px-2 py-1 text-xs text-sky-700">
+                          <span key={point} className="rounded-md bg-brand-50 px-2 py-1 text-xs text-brand-700">
                             {point}
                           </span>
                         ))}
@@ -338,7 +338,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 <form action={`/products/${product.id}/diagnoses/generate`} method="post">
                   <button
                     type="submit"
-                    className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                    className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
                   >
                     <Brain className="h-4 w-4" aria-hidden="true" />
                     生成诊断
@@ -354,7 +354,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   <p className="mt-2 text-sm leading-6 text-slate-800">{latestDiagnosis.positioning}</p>
                 </div>
 
-                <div className="rounded-md border border-slate-200 p-4">
+                <div className="rounded-md border border-border-subtle p-4">
                   <p className="text-xs font-medium text-slate-500">价格带判断</p>
                   <p className="mt-2 text-sm leading-6 text-slate-800">{latestDiagnosis.price_band}</p>
                 </div>
@@ -367,7 +367,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 </div>
 
                 {canEdit ? (
-                  <details className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+                  <details className="rounded-md border border-border-subtle bg-surface-muted px-3 py-2">
                     <summary className="cursor-pointer text-sm font-medium text-slate-700">
                       编辑诊断
                     </summary>
@@ -376,7 +376,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 ) : null}
               </div>
             ) : (
-              <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+              <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
                 还没有诊断报告。建议补充至少 1-3 个竞品后生成第一版诊断。
               </div>
             )}
@@ -387,7 +387,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-emerald-100 text-emerald-700">
               <ImageIcon className="h-4 w-4" aria-hidden="true" />
             </div>
-            <h3 className="mt-4 text-sm font-semibold text-slate-950">主图方案</h3>
+            <h3 className="mt-4 text-sm font-semibold text-foreground">主图方案</h3>
             <p className="mt-2 text-sm leading-6 text-slate-500">
               根据诊断结果生成可交给设计执行的画面方向
             </p>
@@ -395,7 +395,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               <form action={`/products/${product.id}/creative-plans/main-images/generate`} method="post">
                 <button
                   type="submit"
-                  className="mt-4 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white transition hover:bg-slate-800"
+                  className="mt-4 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white transition hover:bg-brand-800"
                 >
                   <ImageIcon className="h-3.5 w-3.5" aria-hidden="true" />
                   生成主图
@@ -407,7 +407,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
             <div className="flex h-9 w-9 items-center justify-center rounded-md bg-violet-100 text-violet-700">
               <Video className="h-4 w-4" aria-hidden="true" />
             </div>
-            <h3 className="mt-4 text-sm font-semibold text-slate-950">短视频脚本</h3>
+            <h3 className="mt-4 text-sm font-semibold text-foreground">短视频脚本</h3>
             <p className="mt-2 text-sm leading-6 text-slate-500">
               生成开头钩子、镜头分镜、口播和转化引导
             </p>
@@ -415,7 +415,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               <form action={`/products/${product.id}/creative-plans/video-scripts/generate`} method="post">
                 <button
                   type="submit"
-                  className="mt-4 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white transition hover:bg-slate-800"
+                  className="mt-4 inline-flex h-9 w-full items-center justify-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white transition hover:bg-brand-800"
                 >
                   <Video className="h-3.5 w-3.5" aria-hidden="true" />
                   生成脚本
@@ -469,7 +469,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 <form action={`/products/${product.id}/review-reports/generate`} method="post">
                 <button
                   type="submit"
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
                 >
                   <Megaphone className="h-4 w-4" aria-hidden="true" />
                   生成复盘
@@ -493,7 +493,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 </div>
 
                 {canEdit ? (
-                  <details className="rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+                  <details className="rounded-md border border-border-subtle bg-surface-muted px-3 py-2">
                   <summary className="cursor-pointer text-sm font-medium text-slate-700">
                     编辑复盘
                   </summary>
@@ -502,13 +502,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 ) : null}
               </div>
             ) : (
-              <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center text-sm text-slate-500">
+              <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-8 text-center text-sm text-slate-500">
                 暂无复盘报告。先录入一条经营数据，再生成复盘。
               </div>
             )}
 
-            <div className="mt-6 overflow-hidden rounded-md border border-slate-200">
-              <div className="grid grid-cols-[1fr_0.9fr_0.8fr_0.8fr_0.55fr_0.55fr_0.55fr_0.55fr] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500">
+            <div className="mt-6 overflow-hidden rounded-md border border-border-subtle">
+              <div className="grid grid-cols-[1fr_0.9fr_0.8fr_0.8fr_0.55fr_0.55fr_0.55fr_0.55fr] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500">
                 <span>周期</span>
                 <span>实验</span>
                 <span>素材</span>
@@ -524,7 +524,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   还没有经营数据。录入后这里会展示最近 5 条记录。
                 </div>
               ) : (
-                <div className="divide-y divide-slate-200">
+                <div className="divide-y divide-border-subtle">
                   {performanceRecords.map((record) => (
                     <div
                       key={record.id}
@@ -547,7 +547,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                         {formatPercent(record.conversion_rate)}
                       </span>
                       <span className="text-slate-700">{formatMoney(record.spend)}</span>
-                      <span className="font-semibold text-slate-950">{formatDecimal(record.roi)}</span>
+                      <span className="font-semibold text-foreground">{formatDecimal(record.roi)}</span>
                     </div>
                   ))}
                 </div>
@@ -566,7 +566,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   <LinkIcon className="h-4 w-4" aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-slate-950">生成推荐链接</h2>
+                  <h2 className="text-base font-semibold text-foreground">生成推荐链接</h2>
                   <p className="text-sm text-slate-500">按商品承接页、短视频投放和主图测试生成链接</p>
                 </div>
               </div>
@@ -574,7 +574,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 <form action={`/products/${product.id}/promotion-links/generate`} method="post" className="mt-4">
                 <button
                   type="submit"
-                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
                 >
                   <LinkIcon className="h-4 w-4" aria-hidden="true" />
                   生成链接
@@ -601,7 +601,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   管理商品承接、短视频投放、主图测试和私域转发链接
                 </p>
               </div>
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {product.promotion_links.length} 个链接
               </span>
             </div>
@@ -613,7 +613,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 ))}
               </div>
             ) : (
-              <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+              <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
                 还没有推荐链接。可以先生成一组系统链接，或手动添加平台推广链接。
               </div>
             )}
@@ -656,7 +656,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               <form action={`/products/${product.id}/ad-recommendations/generate`} method="post">
               <button
                 type="submit"
-                className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
               >
                 <Megaphone className="h-4 w-4" aria-hidden="true" />
                 生成投放建议
@@ -711,7 +711,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       name="confirmation_note"
                       defaultValue={latestAdRecommendation.confirmation_note ?? ""}
                       rows={2}
-                      className="resize-y rounded-md border border-slate-200 px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
+                      className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
                       placeholder="记录确认人判断、预算边界或暂不执行原因"
                     />
                   </label>
@@ -720,7 +720,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       type="submit"
                       name="confirmation_status"
                       value="confirmed"
-                      className="h-9 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+                      className="h-9 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
                     >
                       确认建议
                     </button>
@@ -728,7 +728,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       type="submit"
                       name="confirmation_status"
                       value="rejected"
-                      className="h-9 panel px-3 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+                      className="h-9 panel px-3 text-xs font-semibold text-slate-700 hover:bg-surface-muted"
                     >
                       暂不采纳
                     </button>
@@ -738,7 +738,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               ) : null}
             </div>
           ) : (
-            <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+            <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
               还没有投放建议。建议先生成诊断、主图/视频方案，并录入至少一条经营数据。
             </div>
           )}
@@ -768,13 +768,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 <form action={`/products/${product.id}/assets/sync`} method="post">
                 <button
                   type="submit"
-                  className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                  className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                 >
                   同步历史素材
                 </button>
                 </form>
               ) : null}
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {assetLibrary.length} 个素材
               </span>
             </div>
@@ -783,7 +783,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
           {assetLibrary.length > 0 ? (
             <div className="mt-5 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
               {assetLibrary.map((asset) => (
-                <div key={asset.url} className="overflow-hidden rounded-md border border-slate-200 bg-slate-50">
+                <div key={asset.url} className="overflow-hidden rounded-md border border-border-subtle bg-surface-muted">
                   {asset.kind === "image" ? (
                     <a href={absoluteMediaUrl(asset.url)} target="_blank" rel="noreferrer">
                       {/* AI 原图约 1.5MB，next/image 输出 WebP/AVIF；fill + 相对容器保持原裁切视觉。 */}
@@ -806,7 +806,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   )}
                   <div className="space-y-2 px-3 py-3">
                     <div className="flex items-center justify-between gap-2">
-                      <p className="text-sm font-semibold text-slate-950">{asset.title}</p>
+                      <p className="text-sm font-semibold text-foreground">{asset.title}</p>
                       <span className="rounded-md bg-white px-2 py-1 text-xs text-slate-600">
                         {asset.kind === "image" ? "主图" : "视频"}
                       </span>
@@ -835,7 +835,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                         </span>
                       ))}
                       {asset.usageContexts.map((context) => (
-                        <span key={context} className="rounded-md bg-sky-50 px-2 py-1 text-xs text-sky-700">
+                        <span key={context} className="rounded-md bg-brand-50 px-2 py-1 text-xs text-brand-700">
                           {context}
                         </span>
                       ))}
@@ -845,7 +845,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       href={absoluteMediaUrl(asset.url)}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex h-8 items-center panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                      className="inline-flex h-8 items-center panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                     >
                       打开素材
                     </a>
@@ -868,7 +868,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                               min="1"
                               max="5"
                               defaultValue={asset.rating ?? ""}
-                              className="h-9 rounded-md border border-slate-200 px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
                             />
                           </label>
                           <label className="grid gap-1.5">
@@ -876,7 +876,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             <select
                               name="status"
                               defaultValue={asset.status || "待评估"}
-                              className="h-9 rounded-md border border-slate-200 px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
                             >
                               <option value="待评估">待评估</option>
                               <option value="通过">通过</option>
@@ -893,7 +893,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                               type="number"
                               min="1"
                               defaultValue={asset.assetVersion}
-                              className="h-9 rounded-md border border-slate-200 px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
                             />
                           </label>
                           <label className="grid gap-1.5">
@@ -901,7 +901,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             <input
                               name="usage_contexts"
                               defaultValue={asset.usageContexts.join("，")}
-                              className="h-9 rounded-md border border-slate-200 px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
                               placeholder="冷启动，人群测试，复测"
                             />
                           </label>
@@ -911,7 +911,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           <input
                             name="tags"
                             defaultValue={asset.tags.join("，")}
-                            className="h-9 rounded-md border border-slate-200 px-2 text-sm outline-none focus:border-slate-400"
+                            className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
                             placeholder="通勤，控油，高点击潜力"
                           />
                         </label>
@@ -921,13 +921,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             name="note"
                             defaultValue={asset.note}
                             rows={2}
-                            className="resize-y rounded-md border border-slate-200 px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
+                            className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
                             placeholder="记录适合投放的人群、需要优化的问题或复盘观察"
                           />
                         </label>
                         <button
                           type="submit"
-                          className="h-9 w-fit rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+                          className="h-9 w-fit rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
                         >
                           保存评价
                         </button>
@@ -939,7 +939,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               ))}
             </div>
           ) : (
-            <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+            <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
               还没有生成素材。可以先到主图或视频 Tab 生成第一批草稿。
             </div>
           )}
@@ -955,21 +955,21 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 查看当前商品所有图片和视频生成任务，包括状态、结果、错误和重试入口
               </p>
             </div>
-            <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+            <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
               {product.generation_jobs.length + product.public_link_parse_tasks.length} 个任务
             </span>
           </div>
 
           {product.generation_jobs.length > 0 ? (
-            <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-              <div className="grid grid-cols-[80px_90px_110px_1fr_170px] bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500">
+            <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+              <div className="grid grid-cols-[80px_90px_110px_1fr_170px] bg-surface-muted px-3 py-2 text-xs font-semibold text-slate-500">
                 <span>ID</span>
                 <span>类型</span>
                 <span>状态</span>
                 <span>结果 / 错误</span>
                 <span>操作</span>
               </div>
-              <div className="divide-y divide-slate-200">
+              <div className="divide-y divide-border-subtle">
                 {product.generation_jobs.map((job) => (
                   <div
                     key={job.id}
@@ -984,7 +984,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           href={absoluteMediaUrl(jobResultUrl(job) || "")}
                           target="_blank"
                           rel="noreferrer"
-                          className="text-sky-700 hover:text-sky-900"
+                          className="text-brand-700 hover:text-brand-900"
                         >
                           打开生成结果
                         </a>
@@ -999,7 +999,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                     <div className="flex flex-wrap items-center gap-2">
                       <Link
                         href={`/products/${product.id}/generation-jobs/${job.id}`}
-                        className="inline-flex h-8 items-center panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                        className="inline-flex h-8 items-center panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                       >
                         详情
                       </Link>
@@ -1008,7 +1008,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           <input type="hidden" name="tab" value="jobs" />
                           <button
                             type="submit"
-                            className="h-8 rounded-md bg-slate-950 px-3 text-xs font-medium text-white hover:bg-slate-800"
+                            className="h-8 rounded-md bg-brand-900 px-3 text-xs font-medium text-white hover:bg-brand-800"
                           >
                             重试
                           </button>
@@ -1018,7 +1018,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           <input type="hidden" name="tab" value="jobs" />
                           <button
                             type="submit"
-                            className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                            className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                           >
                             取消
                           </button>
@@ -1032,31 +1032,31 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               </div>
             </div>
           ) : (
-            <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+            <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
               还没有生成任务。可以先到主图或视频 Tab 创建第一条生成任务。
             </div>
           )}
 
-          <div className="mt-6 border-t border-slate-200 pt-5">
+          <div className="mt-6 border-t border-border-subtle pt-5">
             <div className="flex items-center justify-between gap-4">
               <div>
-                <h3 className="text-sm font-semibold text-slate-950">公开链接解析任务</h3>
+                <h3 className="text-sm font-semibold text-foreground">公开链接解析任务</h3>
                 <p className="mt-1 text-sm text-slate-500">用于把用户提交的公开商品页异步解析成竞品档案</p>
               </div>
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {product.public_link_parse_tasks.length} 个任务
               </span>
             </div>
 
             {product.public_link_parse_tasks.length > 0 ? (
-              <div className="mt-4 overflow-hidden rounded-md border border-slate-200">
-                <div className="grid grid-cols-[80px_110px_1fr_1.2fr] bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500">
+              <div className="mt-4 overflow-hidden rounded-md border border-border-subtle">
+                <div className="grid grid-cols-[80px_110px_1fr_1.2fr] bg-surface-muted px-3 py-2 text-xs font-semibold text-slate-500">
                   <span>ID</span>
                   <span>状态</span>
                   <span>链接</span>
                   <span>结果 / 错误</span>
                 </div>
-                <div className="divide-y divide-slate-200">
+                <div className="divide-y divide-border-subtle">
                   {product.public_link_parse_tasks.map((task) => (
                     <div
                       key={task.id}
@@ -1064,7 +1064,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                     >
                       <span className="font-medium text-slate-700">#{task.id}</span>
                       <LinkParseTaskStatusBadge status={task.status} />
-                      <a href={task.url} target="_blank" rel="noreferrer" className="truncate text-sky-700 hover:text-sky-900">
+                      <a href={task.url} target="_blank" rel="noreferrer" className="truncate text-brand-700 hover:text-brand-900">
                         {task.url}
                       </a>
                       {task.error ? (
@@ -1081,7 +1081,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                 </div>
               </div>
             ) : (
-              <div className="mt-4 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-8 text-center text-sm text-slate-500">
+              <div className="mt-4 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-8 text-center text-sm text-slate-500">
                 还没有公开链接解析任务。可以在概览里提交竞品链接。
               </div>
             )}
@@ -1099,13 +1099,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {videoScripts.length > 0 ? `最近 ${videoScripts.length} 条脚本` : "待生成"}
               </span>
               <form action={`/products/${product.id}/creative-plans/video-scripts/generate`} method="post">
                 <button
                   type="submit"
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
                 >
                   <Video className="h-4 w-4" aria-hidden="true" />
                   生成脚本
@@ -1115,16 +1115,16 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
           </div>
 
           {videoScripts.length === 0 ? (
-            <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+            <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
               还没有短视频脚本。建议先有诊断和主图方向后再生成。
             </div>
           ) : (
             <div className="mt-5 grid gap-4">
               {videoScripts.map((script) => (
-                <div key={script.id} className="rounded-md border border-slate-200 p-4">
+                <div key={script.id} className="rounded-md border border-border-subtle p-4">
                   <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                     <div>
-                      <p className="text-base font-semibold text-slate-950">{script.title}</p>
+                      <p className="text-base font-semibold text-foreground">{script.title}</p>
                       <p className="mt-1 text-sm leading-6 text-slate-500">
                         {planText(script.content, "angle")}
                       </p>
@@ -1144,13 +1144,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                     </p>
                   </div>
 
-                  <div className="mt-4 overflow-hidden rounded-md border border-slate-200">
-                    <div className="grid grid-cols-[90px_1fr_1fr] bg-slate-50 px-3 py-2 text-xs font-semibold text-slate-500">
+                  <div className="mt-4 overflow-hidden rounded-md border border-border-subtle">
+                    <div className="grid grid-cols-[90px_1fr_1fr] bg-surface-muted px-3 py-2 text-xs font-semibold text-slate-500">
                       <span>镜头</span>
                       <span>画面</span>
                       <span>口播</span>
                     </div>
-                    <div className="divide-y divide-slate-200">
+                    <div className="divide-y divide-border-subtle">
                       {planScenes(script.content).map((scene) => (
                         <div
                           key={`${script.id}-${scene.shot}`}
@@ -1185,7 +1185,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                         {generatedVideos(script.content).map((video) => (
                           <div
                             key={video.url}
-                            className="overflow-hidden rounded-md border border-slate-200 bg-slate-50"
+                            className="overflow-hidden rounded-md border border-border-subtle bg-surface-muted"
                           >
                             <video
                               src={absoluteMediaUrl(video.url)}
@@ -1199,7 +1199,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                         ))}
                       </div>
                     ) : (
-                      <div className="mt-3 rounded-md border border-dashed border-slate-300 bg-slate-50 px-3 py-5 text-center text-sm text-slate-500">
+                      <div className="mt-3 rounded-md border border-dashed border-border-strong bg-surface-muted px-3 py-5 text-center text-sm text-slate-500">
                         还没有视频草稿。确认脚本后可先生成 1 条测试视频。
                       </div>
                     )}
@@ -1211,7 +1211,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       <p className="text-xs font-medium text-slate-500">卖点证明</p>
                       <div className="mt-2 flex flex-wrap gap-2">
                         {planList(script.content, "selling_point_proof").map((point) => (
-                          <span key={point} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-700">
+                          <span key={point} className="rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-700">
                             {point}
                           </span>
                         ))}
@@ -1221,7 +1221,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   </div>
 
                   {canEdit ? (
-                    <details className="mt-4 rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+                    <details className="mt-4 rounded-md border border-border-subtle bg-surface-muted px-3 py-2">
                     <summary className="cursor-pointer text-sm font-medium text-slate-700">
                       编辑脚本
                     </summary>
@@ -1245,13 +1245,13 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
               </p>
             </div>
             <div className="flex flex-wrap items-center gap-3">
-              <span className="rounded-md bg-slate-100 px-3 py-1 text-xs font-medium text-slate-600">
+              <span className="rounded-md bg-surface-muted px-3 py-1 text-xs font-medium text-slate-600">
                 {mainImagePlans.length > 0 ? `最近 ${mainImagePlans.length} 个方案` : "待生成"}
               </span>
               <form action={`/products/${product.id}/creative-plans/main-images/generate`} method="post">
                 <button
                   type="submit"
-                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+                  className="inline-flex h-10 items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
                 >
                   <ImageIcon className="h-4 w-4" aria-hidden="true" />
                   生成主图
@@ -1261,16 +1261,16 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
           </div>
 
           {mainImagePlans.length === 0 ? (
-            <div className="mt-5 rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-10 text-center text-sm text-slate-500">
+            <div className="mt-5 rounded-md border border-dashed border-border-strong bg-surface-muted px-4 py-10 text-center text-sm text-slate-500">
               还没有主图方案。建议先生成诊断，再点击右侧“生成主图”。
             </div>
           ) : (
             <div className="mt-5 grid gap-4 lg:grid-cols-2">
               {mainImagePlans.map((plan) => (
-                <div key={plan.id} className="rounded-md border border-slate-200 p-4">
+                <div key={plan.id} className="rounded-md border border-border-subtle p-4">
                   <div className="flex items-start justify-between gap-3">
                     <div>
-                      <p className="text-base font-semibold text-slate-950">{plan.title}</p>
+                      <p className="text-base font-semibold text-foreground">{plan.title}</p>
                       <p className="mt-1 text-sm leading-6 text-slate-500">
                         {planText(plan.content, "angle")}
                       </p>
@@ -1289,7 +1289,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                     <p className="text-xs font-medium text-slate-500">证明点</p>
                     <div className="mt-2 flex flex-wrap gap-2">
                       {planList(plan.content, "proof_points").map((point) => (
-                        <span key={point} className="rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-700">
+                        <span key={point} className="rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-700">
                           {point}
                         </span>
                       ))}
@@ -1320,7 +1320,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             href={absoluteImageUrl(image.url)}
                             target="_blank"
                             rel="noreferrer"
-                            className="group overflow-hidden rounded-md border border-slate-200 bg-slate-50"
+                            className="group overflow-hidden rounded-md border border-border-subtle bg-surface-muted"
                           >
                             {/* AI 原图约 1.5MB，next/image 输出 WebP/AVIF；fill + 相对容器保持原裁切视觉。 */}
                             <div className="relative aspect-square w-full">
@@ -1339,7 +1339,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                         ))}
                       </div>
                     ) : (
-                      <div className="mt-3 rounded-md border border-dashed border-slate-300 bg-slate-50 px-3 py-6 text-center text-sm text-slate-500">
+                      <div className="mt-3 rounded-md border border-dashed border-border-strong bg-surface-muted px-3 py-6 text-center text-sm text-slate-500">
                         还没有图片草稿。确认提示词后可先生成 1 张测试图。
                       </div>
                     )}
@@ -1347,7 +1347,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                   </div>
 
                   {canEdit ? (
-                    <details className="mt-4 rounded-md border border-slate-200 bg-slate-50 px-3 py-2">
+                    <details className="mt-4 rounded-md border border-border-subtle bg-surface-muted px-3 py-2">
                     <summary className="cursor-pointer text-sm font-medium text-slate-700">
                       编辑方案
                     </summary>
@@ -1379,7 +1379,7 @@ function ProductTabNav({
   activeTab: ProductTabKey;
 }) {
   return (
-    <nav className="overflow-x-auto border-b border-slate-200" aria-label="商品运营工作区">
+    <nav className="overflow-x-auto border-b border-border-subtle" aria-label="商品运营工作区">
       <div className="flex min-w-max gap-1">
         {productTabs.map((tab) => {
           const isActive = tab.key === activeTab;
@@ -1389,8 +1389,8 @@ function ProductTabNav({
               href={`/products/${productId}?tab=${tab.key}`}
               className={`inline-flex h-11 items-center border-b-2 px-4 text-sm font-medium transition ${
                 isActive
-                  ? "border-slate-950 text-slate-950"
-                  : "border-transparent text-slate-500 hover:border-slate-300 hover:text-slate-800"
+                  ? "border-slate-950 text-foreground"
+                  : "border-transparent text-slate-500 hover:border-border-strong hover:text-slate-800"
               }`}
             >
               {tab.label}
@@ -1422,17 +1422,17 @@ function ProductWorkflowPanel({
     <section className="panel p-4">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-cyan-700 text-white">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-700 text-white">
             <ClipboardList className="h-5 w-5" aria-hidden="true" />
           </div>
           <div>
-            <h2 className="text-sm font-semibold text-slate-950">单品运营流程</h2>
+            <h2 className="text-sm font-semibold text-foreground">单品运营流程</h2>
             <p className="mt-1 text-sm text-slate-500">{nextStep.done ? "当前商品已跑通主要闭环。" : `下一步：${nextStep.title}`}</p>
           </div>
         </div>
         <Link
           href={nextStep.href}
-          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-slate-950 px-3 text-sm font-medium text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-brand-900 px-3 text-sm font-medium text-white hover:bg-brand-800"
         >
           {nextStep.done ? "查看复盘" : "继续处理"}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -1445,11 +1445,11 @@ function ProductWorkflowPanel({
             key={step.key}
             href={step.href}
             className={`rounded-md border px-3 py-3 transition ${
-              step.done ? "border-emerald-100 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
+              step.done ? "border-emerald-100 bg-emerald-50" : "border-border-subtle bg-white hover:bg-surface-muted"
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-medium text-slate-950">{step.title}</p>
+              <p className="text-sm font-medium text-foreground">{step.title}</p>
               {step.done ? (
                 <CheckCircle2 className="h-4 w-4 text-emerald-700" aria-hidden="true" />
               ) : (
@@ -1538,14 +1538,14 @@ function DiagnosisList({
   accent?: boolean;
 }) {
   return (
-    <div className="rounded-md border border-slate-200 p-4">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
+    <div className="rounded-md border border-border-subtle p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-3 space-y-2">
         {items.map((item) => (
           <p
             key={item}
             className={`rounded-md px-3 py-2 text-sm leading-6 ${
-              accent ? "bg-emerald-50 text-emerald-800" : "bg-slate-50 text-slate-700"
+              accent ? "bg-emerald-50 text-emerald-800" : "bg-surface-muted text-slate-700"
             }`}
           >
             {item}
@@ -1567,14 +1567,14 @@ function ReviewList({
   accent?: boolean;
 }) {
   return (
-    <div className="rounded-md border border-slate-200 p-4">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
+    <div className="rounded-md border border-border-subtle p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-3 space-y-2">
         {items.map((item) => (
           <p
             key={item}
             className={`rounded-md px-3 py-2 text-sm leading-6 ${
-              accent ? "bg-amber-50 text-amber-800" : "bg-slate-50 text-slate-700"
+              accent ? "bg-amber-50 text-amber-800" : "bg-surface-muted text-slate-700"
             }`}
           >
             {item}
@@ -1596,14 +1596,14 @@ function AdTextList({
   accent?: boolean;
 }) {
   return (
-    <div className="rounded-md border border-slate-200 p-4">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
+    <div className="rounded-md border border-border-subtle p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-3 space-y-2">
         {items.map((item) => (
           <p
             key={item}
             className={`rounded-md px-3 py-2 text-sm leading-6 ${
-              accent ? "bg-emerald-50 text-emerald-800" : "bg-slate-50 text-slate-700"
+              accent ? "bg-emerald-50 text-emerald-800" : "bg-surface-muted text-slate-700"
             }`}
           >
             {item}
@@ -1617,12 +1617,12 @@ function AdTextList({
 /** 渲染 AdObjectList 组件，集中展示投放对象列表所需的数据、状态和操作入口。 */
 function AdObjectList({ title, items }: { title: string; items: Record<string, unknown>[] }) {
   return (
-    <div className="rounded-md border border-slate-200 p-4">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
+    <div className="rounded-md border border-border-subtle p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
       <div className="mt-3 space-y-3">
         {items.map((item, index) => (
-          <div key={`${title}-${index}`} className="rounded-md bg-slate-50 px-3 py-3">
-            <p className="text-sm font-medium text-slate-900">
+          <div key={`${title}-${index}`} className="rounded-md bg-surface-muted px-3 py-3">
+            <p className="text-sm font-medium text-foreground">
               {contentObjectText(item, "name") || `方案 ${index + 1}`}
             </p>
             <p className="mt-1 text-sm leading-6 text-slate-600">
@@ -1654,14 +1654,14 @@ function BudgetPlan({ content }: { content: Record<string, unknown> }) {
   const value = content.budget_plan;
   const budget = value && typeof value === "object" && !Array.isArray(value) ? value as Record<string, unknown> : {};
   return (
-    <div className="rounded-md border border-slate-200 p-4">
-      <p className="text-sm font-semibold text-slate-950">预算计划</p>
+    <div className="rounded-md border border-border-subtle p-4">
+      <p className="text-sm font-semibold text-foreground">预算计划</p>
       <div className="mt-3 space-y-2">
         <p className="rounded-md bg-emerald-50 px-3 py-2 text-sm leading-6 text-emerald-800">
           {contentObjectText(budget, "daily_budget") || "先用小预算测试。"}
         </p>
         {contentObjectList(budget, "allocation").map((item) => (
-          <p key={item} className="rounded-md bg-slate-50 px-3 py-2 text-sm leading-6 text-slate-700">
+          <p key={item} className="rounded-md bg-surface-muted px-3 py-2 text-sm leading-6 text-slate-700">
             {item}
           </p>
         ))}
@@ -1678,7 +1678,7 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
   if (!canEdit) {
     return (
       <div>
-        <h2 className="text-base font-semibold text-slate-950">手动添加链接</h2>
+        <h2 className="text-base font-semibold text-foreground">手动添加链接</h2>
         <p className="mt-2 rounded-md border border-amber-200 bg-amber-50 px-3 py-2 text-sm text-amber-800">
           当前账号为只读权限，不能添加推荐链接。
         </p>
@@ -1689,11 +1689,11 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
   return (
     <form action={`/products/${productId}/promotion-links/create`} method="post" className="space-y-4">
       <div className="flex items-center gap-3">
-        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-sky-600 text-white">
+        <div className="flex h-9 w-9 items-center justify-center rounded-md bg-brand-600 text-white">
           <ExternalLink className="h-4 w-4" aria-hidden="true" />
         </div>
         <div>
-          <h2 className="text-base font-semibold text-slate-950">手动添加链接</h2>
+          <h2 className="text-base font-semibold text-foreground">手动添加链接</h2>
           <p className="text-sm text-slate-500">保存平台商品链接、达人链接或活动页链接</p>
         </div>
       </div>
@@ -1703,7 +1703,7 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
         <input
           name="label"
           required
-          className="mt-2 h-10 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          className="mt-2 h-10 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="例如：6月短视频A组链接"
         />
       </label>
@@ -1714,7 +1714,7 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
           name="url"
           required
           type="url"
-          className="mt-2 h-10 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          className="mt-2 h-10 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="https://..."
         />
       </label>
@@ -1725,7 +1725,7 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
           <select
             name="link_type"
             defaultValue="landing"
-            className="mt-2 h-10 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+            className="mt-2 h-10 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           >
             <option value="landing">承接页</option>
             <option value="tracking">投放追踪</option>
@@ -1738,7 +1738,7 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
           <span className="text-sm font-medium text-slate-700">场景</span>
           <input
             name="scenario"
-            className="mt-2 h-10 w-full panel px-3 text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+            className="mt-2 h-10 w-full panel px-3 text-sm text-foreground outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
             placeholder="短视频投放"
           />
         </label>
@@ -1749,14 +1749,14 @@ function PromotionLinkCreateForm({ canEdit, productId }: { canEdit: boolean; pro
         <textarea
           name="note"
           rows={3}
-          className="mt-2 w-full resize-y panel px-3 py-3 text-sm text-slate-950 outline-none transition focus:border-sky-500 focus:ring-4 focus:ring-sky-100"
+          className="mt-2 w-full resize-y panel px-3 py-3 text-sm text-foreground outline-none transition focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="记录链接来源、投放人群、素材版本或活动周期"
         />
       </label>
 
       <button
         type="submit"
-        className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-slate-950 px-4 text-sm font-semibold text-white transition hover:bg-slate-800"
+        className="inline-flex h-10 w-full items-center justify-center gap-2 rounded-md bg-brand-900 px-4 text-sm font-semibold text-white transition hover:bg-brand-800"
       >
         <ExternalLink className="h-4 w-4" aria-hidden="true" />
         保存链接
@@ -1801,10 +1801,10 @@ function AssetAttributionPanel({
   }
 
   return (
-    <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mb-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">素材效果归因</h2>
+          <h2 className="text-sm font-semibold text-foreground">素材效果归因</h2>
           <p className="mt-1 text-xs text-slate-500">按经营数据中关联的生成素材汇总点击、成交、CTR 和 ROI</p>
         </div>
         <span className="w-fit rounded-md bg-white px-2.5 py-1 text-xs text-slate-600">
@@ -1817,12 +1817,12 @@ function AssetAttributionPanel({
           <div key={row.asset.id} className="panel px-3 py-3">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-950">{row.asset.title || "生成素材"}</p>
+                <p className="text-sm font-semibold text-foreground">{row.asset.title || "生成素材"}</p>
                 <p className="mt-1 text-xs text-slate-500">
                   {row.asset.asset_type === "video" ? "视频" : "图片"} · {row.asset.model || "model"}
                 </p>
               </div>
-              <span className="w-fit rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
+              <span className="w-fit rounded-md bg-surface-muted px-2 py-1 text-xs text-slate-600">
                 {row.recordCount} 条数据
               </span>
             </div>
@@ -1861,7 +1861,7 @@ function AssetScaleRecommendationPanel({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
           <p className="text-xs font-medium text-amber-700">素材放量建议</p>
-          <h2 className="mt-1 text-sm font-semibold text-slate-950">
+          <h2 className="mt-1 text-sm font-semibold text-foreground">
             {recommendation.asset.title || "生成素材"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-slate-700">{action}</p>
@@ -1881,7 +1881,7 @@ function AssetScaleRecommendationPanel({
           href={absoluteMediaUrl(recommendation.asset.url)}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
         >
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           查看素材
@@ -1925,11 +1925,11 @@ function PromotionLinkCard({ link }: { link: PromotionLink }) {
   const shortUrl = shortPromotionLinkUrl(link.short_code);
 
   return (
-    <div className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3">
+    <div className="rounded-md border border-border-subtle bg-surface-muted px-4 py-3">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <h3 className="text-sm font-semibold text-slate-950">{link.label}</h3>
+            <h3 className="text-sm font-semibold text-foreground">{link.label}</h3>
             <span className="rounded-md bg-white px-2 py-1 text-xs text-slate-600">
               {promotionLinkTypeLabel(link.link_type)}
             </span>
@@ -1942,7 +1942,7 @@ function PromotionLinkCard({ link }: { link: PromotionLink }) {
           </div>
           <p className="mt-2 break-all text-xs leading-5 text-slate-500">{link.url}</p>
           {shortUrl ? (
-            <p className="mt-2 break-all rounded-md bg-white px-2 py-1 text-xs leading-5 text-sky-700">
+            <p className="mt-2 break-all rounded-md bg-white px-2 py-1 text-xs leading-5 text-brand-700">
               短链：{shortUrl}
             </p>
           ) : null}
@@ -1959,7 +1959,7 @@ function PromotionLinkCard({ link }: { link: PromotionLink }) {
               href={shortUrl}
               target="_blank"
               rel="noreferrer"
-              className="inline-flex h-8 w-fit items-center gap-1.5 rounded-md bg-slate-950 px-3 text-xs font-medium text-white hover:bg-slate-800"
+              className="inline-flex h-8 w-fit items-center gap-1.5 rounded-md bg-brand-900 px-3 text-xs font-medium text-white hover:bg-brand-800"
             >
               <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
               打开短链
@@ -1969,7 +1969,7 @@ function PromotionLinkCard({ link }: { link: PromotionLink }) {
             href={link.tracking_url || link.url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex h-8 w-fit items-center gap-1.5 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            className="inline-flex h-8 w-fit items-center gap-1.5 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
           >
             <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
             打开原链
@@ -2000,10 +2000,10 @@ function PromotionLinkAttributionPanel({
   }
 
   return (
-    <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mb-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">链接效果归因</h2>
+          <h2 className="text-sm font-semibold text-foreground">链接效果归因</h2>
           <p className="mt-1 text-xs text-slate-500">按经营数据中关联的推荐链接汇总点击、成交、花费和 ROI</p>
         </div>
         <span className="w-fit rounded-md bg-white px-2.5 py-1 text-xs text-slate-600">
@@ -2016,10 +2016,10 @@ function PromotionLinkAttributionPanel({
           <div key={row.link.id} className="panel px-3 py-3">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
               <div>
-                <p className="text-sm font-semibold text-slate-950">{row.link.label}</p>
+                <p className="text-sm font-semibold text-foreground">{row.link.label}</p>
                 <p className="mt-1 text-xs text-slate-500">{row.link.scenario || promotionLinkTypeLabel(row.link.link_type)}</p>
               </div>
-              <span className="w-fit rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
+              <span className="w-fit rounded-md bg-surface-muted px-2 py-1 text-xs text-slate-600">
                 {row.recordCount} 条数据
               </span>
             </div>
@@ -2043,17 +2043,17 @@ function AdWorkflowPanel({ product }: { product: ProductDetail }) {
   const nextStep = steps.find((step) => !step.done) ?? steps[steps.length - 1];
 
   return (
-    <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mb-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">投放工作流</h2>
+          <h2 className="text-sm font-semibold text-foreground">投放工作流</h2>
           <p className="mt-1 text-xs text-slate-500">
             从素材和链接生成实验计划，执行前必须人工确认，回填数据后再复盘。
           </p>
         </div>
         <Link
           href={nextStep.href}
-          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
         >
           {nextStep.done ? "查看复盘" : "继续处理"}
           <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -2066,11 +2066,11 @@ function AdWorkflowPanel({ product }: { product: ProductDetail }) {
             key={step.title}
             href={step.href}
             className={`rounded-md border px-3 py-3 transition ${
-              step.done ? "border-emerald-100 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
+              step.done ? "border-emerald-100 bg-emerald-50" : "border-border-subtle bg-white hover:bg-surface-muted"
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-medium text-slate-950">{step.title}</p>
+              <p className="text-sm font-medium text-foreground">{step.title}</p>
               {step.done ? (
                 <CheckCircle2 className="h-4 w-4 text-emerald-700" aria-hidden="true" />
               ) : (
@@ -2148,7 +2148,7 @@ function AdLinkRecommendationPanel({
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <p className="text-xs font-medium text-emerald-700">推荐投放链接</p>
-          <h2 className="mt-1 text-sm font-semibold text-slate-950">{bestLink.link.label}</h2>
+          <h2 className="mt-1 text-sm font-semibold text-foreground">{bestLink.link.label}</h2>
           <p className="mt-2 text-sm leading-6 text-slate-700">
             已关联 {bestLink.recordCount} 条经营数据，ROI {formatNumberDecimal(bestLink.roi)}，
             CTR {formatNumberPercent(bestLink.ctr)}。下一轮投放可优先沿用该链接，并继续观察转化稳定性。
@@ -2158,7 +2158,7 @@ function AdLinkRecommendationPanel({
           href={bestLink.link.url}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
         >
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           打开链接
@@ -2183,11 +2183,11 @@ function AdAssetRecommendationPanel({
   }
 
   return (
-    <div className="mb-5 rounded-md border border-sky-100 bg-sky-50 p-4">
+    <div className="mb-5 rounded-md border border-brand-100 bg-brand-50 p-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-xs font-medium text-sky-700">推荐投放素材</p>
-          <h2 className="mt-1 text-sm font-semibold text-slate-950">
+          <p className="text-xs font-medium text-brand-700">推荐投放素材</p>
+          <h2 className="mt-1 text-sm font-semibold text-foreground">
             {recommendation.asset.title || "生成素材"}
           </h2>
           <p className="mt-2 text-sm leading-6 text-slate-700">
@@ -2199,7 +2199,7 @@ function AdAssetRecommendationPanel({
           href={absoluteMediaUrl(recommendation.asset.url)}
           target="_blank"
           rel="noreferrer"
-          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit shrink-0 items-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white hover:bg-brand-800"
         >
           <ExternalLink className="h-3.5 w-3.5" aria-hidden="true" />
           打开素材
@@ -2229,12 +2229,12 @@ function AdExperimentDashboardPanel({
     <div className="mb-5 panel p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">实验看板</h2>
+          <h2 className="text-sm font-semibold text-foreground">实验看板</h2>
           <p className="mt-1 text-xs text-slate-500">
             按投放实验汇总回填数据，快速判断继续、暂停、复制或放量
           </p>
         </div>
-        <span className="w-fit rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-600">
+        <span className="w-fit rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-600">
           {dashboard.measured_experiments}/{dashboard.total_experiments} 已回填
         </span>
       </div>
@@ -2251,7 +2251,7 @@ function AdExperimentDashboardPanel({
           <p className="text-xs font-medium text-emerald-700">当前优胜实验</p>
           <div className="mt-2 flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
             <div>
-              <h3 className="text-sm font-semibold text-slate-950">
+              <h3 className="text-sm font-semibold text-foreground">
                 {dashboard.best_experiment.name}
               </h3>
               <p className="mt-1 text-sm leading-6 text-slate-700">
@@ -2269,15 +2269,15 @@ function AdExperimentDashboardPanel({
 
       <div className="mt-4 grid gap-3">
         {rows.map((row) => (
-          <div key={row.ad_experiment_id} className="rounded-md border border-slate-200 bg-slate-50 px-3 py-3">
+          <div key={row.ad_experiment_id} className="rounded-md border border-border-subtle bg-surface-muted px-3 py-3">
             <div className="flex flex-col gap-2 lg:flex-row lg:items-start lg:justify-between">
               <div className="min-w-0">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h3 className="text-sm font-semibold text-slate-950">{row.name}</h3>
+                  <h3 className="text-sm font-semibold text-foreground">{row.name}</h3>
                   <span className="rounded-md bg-white px-2 py-1 text-xs text-slate-600">
                     {adExperimentStatusLabel(row.status)}
                   </span>
-                  <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
+                  <span className="rounded-md bg-surface-muted px-2 py-1 text-xs text-slate-600">
                     {formatDateRange(row.period_start, row.period_end)}
                   </span>
                 </div>
@@ -2329,7 +2329,7 @@ function AdExperimentPanel({
   canEdit: boolean;
 }) {
   return (
-    <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mb-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       {status === "generated" ? (
         <div className="mb-3 rounded-md border border-emerald-200 bg-emerald-50 px-3 py-2 text-sm text-emerald-700">
           已生成投放实验计划，实际投放前仍需人工确认。
@@ -2348,7 +2348,7 @@ function AdExperimentPanel({
 
       <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">投放实验计划</h2>
+          <h2 className="text-sm font-semibold text-foreground">投放实验计划</h2>
           <p className="mt-1 text-xs text-slate-500">
             把推荐素材和推荐链接组合成可复盘的测试单，只做计划和记录，不自动执行资金操作
           </p>
@@ -2357,7 +2357,7 @@ function AdExperimentPanel({
           <form action={`/products/${productId}/ad-experiments/generate`} method="post">
           <button
             type="submit"
-            className="inline-flex h-9 w-fit items-center justify-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white transition hover:bg-slate-800"
+            className="inline-flex h-9 w-fit items-center justify-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white transition hover:bg-brand-800"
           >
             <Megaphone className="h-3.5 w-3.5" aria-hidden="true" />
             生成实验
@@ -2367,7 +2367,7 @@ function AdExperimentPanel({
       </div>
 
       {experiments.length === 0 ? (
-        <div className="mt-4 rounded-md border border-dashed border-slate-300 bg-white px-4 py-8 text-center text-sm text-slate-500">
+        <div className="mt-4 rounded-md border border-dashed border-border-strong bg-white px-4 py-8 text-center text-sm text-slate-500">
           还没有实验计划。可以先用现有素材和链接生成第一条小预算测试单。
         </div>
       ) : (
@@ -2377,8 +2377,8 @@ function AdExperimentPanel({
               <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                 <div>
                   <div className="flex flex-wrap items-center gap-2">
-                    <h3 className="text-sm font-semibold text-slate-950">{experiment.name}</h3>
-                    <span className="rounded-md bg-slate-100 px-2 py-1 text-xs text-slate-600">
+                    <h3 className="text-sm font-semibold text-foreground">{experiment.name}</h3>
+                    <span className="rounded-md bg-surface-muted px-2 py-1 text-xs text-slate-600">
                       {adExperimentStatusLabel(experiment.status)}
                     </span>
                   </div>
@@ -2397,7 +2397,7 @@ function AdExperimentPanel({
               </div>
 
               {experiment.hypothesis ? (
-                <p className="mt-3 rounded-md bg-slate-50 px-3 py-2 text-sm leading-6 text-slate-600">
+                <p className="mt-3 rounded-md bg-surface-muted px-3 py-2 text-sm leading-6 text-slate-600">
                   {experiment.hypothesis}
                 </p>
               ) : null}
@@ -2447,7 +2447,7 @@ function AdExperimentStatusActions({
           <input type="hidden" name="status" value={item.status} />
           <button
             type="submit"
-            className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+            className="h-8 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
           >
             {item.label}
           </button>
@@ -2513,7 +2513,7 @@ function CompetitorImportAlert({
 }) {
   if (importStatus === "queued") {
     return (
-      <div className="mb-4 rounded-md border border-sky-200 bg-sky-50 px-3 py-2 text-sm text-sky-700">
+      <div className="mb-4 rounded-md border border-brand-200 bg-brand-50 px-3 py-2 text-sm text-brand-700">
         已创建竞品链接解析任务，可在任务中心查看后续处理结果。
       </div>
     );
@@ -2565,10 +2565,10 @@ function CompetitorInsightsPanel({ insights }: { insights: CompetitorInsights })
   }
 
   return (
-    <div className="mb-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mb-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">竞品洞察</h2>
+          <h2 className="text-sm font-semibold text-foreground">竞品洞察</h2>
           <p className="mt-1 text-xs text-slate-500">基于当前竞品记录汇总价格带、卖点频次和数据完整度</p>
         </div>
         <span className="w-fit rounded-md bg-white px-2.5 py-1 text-xs text-slate-600">
@@ -2629,10 +2629,10 @@ function CompetitorMonitorPanel({
   }
 
   return (
-    <div className="mt-5 rounded-md border border-slate-200 bg-slate-50 p-4">
+    <div className="mt-5 rounded-md border border-border-subtle bg-surface-muted p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">竞品监控</h2>
+          <h2 className="text-sm font-semibold text-foreground">竞品监控</h2>
           <p className="mt-1 text-xs text-slate-500">保存监控频率和快照，检查时只解析已录入的公开链接</p>
         </div>
         <span className="w-fit rounded-md bg-white px-2.5 py-1 text-xs text-slate-600">
@@ -2640,7 +2640,7 @@ function CompetitorMonitorPanel({
         </span>
       </div>
 
-      <div className="mt-4 divide-y divide-slate-200 overflow-hidden panel">
+      <div className="mt-4 divide-y divide-border-subtle overflow-hidden panel">
         {competitors.map((competitor) => {
           const monitor = monitorByCompetitor.get(competitor.id);
           const latestSnapshot = monitor?.snapshots?.[0];
@@ -2648,7 +2648,7 @@ function CompetitorMonitorPanel({
           return (
             <div key={competitor.id} className="grid gap-3 px-4 py-3 text-sm lg:grid-cols-[1.1fr_0.9fr_1.4fr_auto] lg:items-center">
               <div>
-                <p className="font-medium text-slate-950">{competitor.name}</p>
+                <p className="font-medium text-foreground">{competitor.name}</p>
                 <p className="mt-1 text-xs text-slate-500">
                   {monitor ? `每 ${monitor.interval_days} 天检查` : competitor.url ? "可启用监控" : "缺少链接"}
                 </p>
@@ -2662,7 +2662,7 @@ function CompetitorMonitorPanel({
                   <span className="rounded-md bg-rose-50 px-2 py-1 text-xs text-rose-700">{latestSnapshot.error}</span>
                 ) : (
                   (latestSnapshot?.changes ?? ["暂无快照"]).slice(0, 3).map((change) => (
-                    <span key={change} className="rounded-md bg-sky-50 px-2 py-1 text-xs text-sky-700">
+                    <span key={change} className="rounded-md bg-brand-50 px-2 py-1 text-xs text-brand-700">
                       {change}
                     </span>
                   ))
@@ -2673,7 +2673,7 @@ function CompetitorMonitorPanel({
                   <form action={`/products/${productId}/competitor-monitors/${monitor.id}/run`} method="post">
                     <button
                       type="submit"
-                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-slate-950 px-3 text-xs font-semibold text-white transition hover:bg-slate-800"
+                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-brand-900 px-3 text-xs font-semibold text-white transition hover:bg-brand-800"
                     >
                       <RefreshCw className="h-3.5 w-3.5" aria-hidden="true" />
                       检查
@@ -2685,7 +2685,7 @@ function CompetitorMonitorPanel({
                     <button
                       type="submit"
                       disabled={!competitor.url}
-                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-white px-3 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-400"
+                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-white px-3 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-surface-muted disabled:cursor-not-allowed disabled:text-slate-400"
                     >
                       启用
                     </button>
@@ -2705,7 +2705,7 @@ function InsightMetric({ label, value }: { label: string; value: string }) {
   return (
     <div className="panel px-3 py-2">
       <p className="text-xs text-slate-500">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-slate-950">{value}</p>
+      <p className="mt-1 text-sm font-semibold text-foreground">{value}</p>
     </div>
   );
 }
@@ -2777,9 +2777,9 @@ function PerformanceSummaryCards({ summary }: { summary: PerformanceSummary }) {
   return (
     <div className="mb-5 grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
       {items.map((item) => (
-        <div key={item.label} className="rounded-md border border-slate-200 bg-slate-50 px-4 py-3">
+        <div key={item.label} className="rounded-md border border-border-subtle bg-surface-muted px-4 py-3">
           <p className="text-xs text-slate-500">{item.label}</p>
-          <p className="mt-1 text-lg font-semibold text-slate-950">{item.value}</p>
+          <p className="mt-1 text-lg font-semibold text-foreground">{item.value}</p>
         </div>
       ))}
     </div>
@@ -2803,10 +2803,10 @@ function PerformanceTrendPanel({ records }: { records: PerformanceRecord[] }) {
     <div className="mb-5 panel p-4">
       <div className="flex flex-col gap-1 sm:flex-row sm:items-end sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">经营趋势</h2>
+          <h2 className="text-sm font-semibold text-foreground">经营趋势</h2>
           <p className="mt-1 text-xs text-slate-500">查看最近 {trendRecords.length} 条数据的 CTR、转化率和 ROI 变化</p>
         </div>
-        <span className="w-fit rounded-md bg-slate-100 px-2.5 py-1 text-xs text-slate-600">
+        <span className="w-fit rounded-md bg-surface-muted px-2.5 py-1 text-xs text-slate-600">
           最近记录
         </span>
       </div>
@@ -2818,7 +2818,7 @@ function PerformanceTrendPanel({ records }: { records: PerformanceRecord[] }) {
           const roi = numberValue(record.roi);
 
           return (
-            <div key={record.id} className="grid gap-2 rounded-md bg-slate-50 px-3 py-3">
+            <div key={record.id} className="grid gap-2 rounded-md bg-surface-muted px-3 py-3">
               <div className="flex items-center justify-between gap-3 text-xs">
                 <span className="font-medium text-slate-700">
                   {record.period_start} 至 {record.period_end}
@@ -2857,7 +2857,7 @@ function TrendBar({
       <span className="text-slate-500">{label}</span>
       <div className="h-2 overflow-hidden rounded-full bg-white">
         <div
-          className={`h-full rounded-full ${accent ? "bg-emerald-500" : "bg-sky-500"}`}
+          className={`h-full rounded-full ${accent ? "bg-emerald-500" : "bg-brand-500"}`}
           style={{ width: `${Math.max(4, Math.min(percent, 100))}%` }}
         />
       </div>
@@ -2878,10 +2878,10 @@ function StageCard({
 }) {
   return (
     <div className="panel p-4">
-      <div className="flex h-9 w-9 items-center justify-center rounded-md bg-slate-100 text-slate-700">
+      <div className="flex h-9 w-9 items-center justify-center rounded-md bg-surface-muted text-slate-700">
         <Icon className="h-4 w-4" aria-hidden="true" />
       </div>
-      <h3 className="mt-4 text-sm font-semibold text-slate-950">{title}</h3>
+      <h3 className="mt-4 text-sm font-semibold text-foreground">{title}</h3>
       <p className="mt-2 text-sm leading-6 text-slate-500">{detail}</p>
     </div>
   );
@@ -2907,14 +2907,14 @@ function GenerationJobSummary({
     <section className="panel px-4 py-3">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h2 className="text-sm font-semibold text-slate-950">生成任务</h2>
+          <h2 className="text-sm font-semibold text-foreground">生成任务</h2>
           <p className="mt-1 text-xs text-slate-500">图片和视频生成会在后台继续执行，页面会自动刷新状态。</p>
         </div>
         <div className="flex flex-wrap gap-2">
           {jobs.map((job) => (
             <div
               key={job.id}
-              className="inline-flex items-center gap-2 rounded-md border border-slate-200 bg-slate-50 px-2.5 py-1.5"
+              className="inline-flex items-center gap-2 rounded-md border border-border-subtle bg-surface-muted px-2.5 py-1.5"
             >
               <span className="text-xs text-slate-500">{job.kind === "video_asset" ? "视频" : "图片"} #{job.id}</span>
               <JobStatusBadge job={job} />
@@ -2923,7 +2923,7 @@ function GenerationJobSummary({
                   <input type="hidden" name="tab" value={activeTab} />
                   <button
                     type="submit"
-                    className="h-6 rounded-md bg-slate-950 px-2 text-xs font-medium text-white hover:bg-slate-800"
+                    className="h-6 rounded-md bg-brand-900 px-2 text-xs font-medium text-white hover:bg-brand-800"
                   >
                     重试
                   </button>
@@ -2933,7 +2933,7 @@ function GenerationJobSummary({
                   <input type="hidden" name="tab" value={activeTab} />
                   <button
                     type="submit"
-                    className="h-6 panel px-2 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                    className="h-6 panel px-2 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                   >
                     取消
                   </button>
@@ -2970,11 +2970,11 @@ function JobStatusBadge({ job }: { job: GenerationJob | undefined }) {
     cancelled: "已取消",
   };
   const tone: Record<GenerationJob["status"], string> = {
-    pending: "bg-slate-100 text-slate-600",
+    pending: "bg-surface-muted text-slate-600",
     running: "bg-amber-50 text-amber-700",
     succeeded: "bg-emerald-50 text-emerald-700",
     failed: "bg-rose-50 text-rose-700",
-    cancelled: "bg-slate-100 text-slate-500",
+    cancelled: "bg-surface-muted text-slate-500",
   };
 
   return (
@@ -2999,13 +2999,13 @@ function LinkParseTaskStatusBadge({ status }: { status: string }) {
   };
   const tone: Record<string, string> = {
     pending: "bg-amber-50 text-amber-700",
-    running: "bg-sky-50 text-sky-700",
+    running: "bg-brand-50 text-brand-700",
     succeeded: "bg-emerald-50 text-emerald-700",
     failed: "bg-rose-50 text-rose-700",
   };
 
   return (
-    <span className={`w-fit rounded-md px-2 py-1 text-xs font-medium ${tone[status] ?? "bg-slate-100 text-slate-600"}`}>
+    <span className={`w-fit rounded-md px-2 py-1 text-xs font-medium ${tone[status] ?? "bg-surface-muted text-slate-600"}`}>
       {statusLabels[status] ?? status}
     </span>
   );
@@ -3113,7 +3113,7 @@ function PlanField({
   highlight?: boolean;
 }) {
   return (
-    <div className={`rounded-md px-3 py-2 ${highlight ? "bg-emerald-50" : "bg-slate-50"}`}>
+    <div className={`rounded-md px-3 py-2 ${highlight ? "bg-emerald-50" : "bg-surface-muted"}`}>
       <p className={`text-xs font-medium ${highlight ? "text-emerald-700" : "text-slate-500"}`}>
         {label}
       </p>
@@ -3258,12 +3258,12 @@ function generatedVideos(content: Record<string, unknown>): Array<{
 /** 把素材状态状态映射为视觉样式，避免组件内散落条件分支。 */
 function assetStatusTone(status: string): string {
   const tones: Record<string, string> = {
-    待评估: "bg-slate-100 text-slate-600",
+    待评估: "bg-surface-muted text-slate-600",
     通过: "bg-emerald-50 text-emerald-700",
     弃用: "bg-rose-50 text-rose-700",
     复测: "bg-amber-50 text-amber-700",
   };
-  return tones[status] ?? "bg-slate-100 text-slate-600";
+  return tones[status] ?? "bg-surface-muted text-slate-600";
 }
 
 /** 把投放建议确认状态映射为中文显示文本，保持页面口径一致。 */
@@ -3281,7 +3281,7 @@ function adRecommendationConfirmationTone(status: string): string {
   const tones: Record<string, string> = {
     pending: "bg-amber-100 text-amber-700",
     confirmed: "bg-emerald-100 text-emerald-700",
-    rejected: "bg-slate-100 text-slate-600",
+    rejected: "bg-surface-muted text-slate-600",
   };
   return tones[status] ?? "bg-amber-100 text-amber-700";
 }

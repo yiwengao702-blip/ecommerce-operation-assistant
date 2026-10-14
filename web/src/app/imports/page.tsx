@@ -29,12 +29,12 @@ const templates = [
 /** 渲染导入页面；在服务端加载业务数据，并把交互交给对应表单或客户端组件。 */
 export default function ImportCenterPage() {
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <div>
           <Link
             href="/"
-            className="inline-flex h-9 items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="inline-flex h-9 items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-surface-muted"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             返回工作台
@@ -43,12 +43,12 @@ export default function ImportCenterPage() {
 
         <header className="panel p-5">
           <div className="flex items-start gap-4">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-slate-950 text-white">
+            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-brand-900 text-white">
               <Upload className="h-6 w-6" aria-hidden="true" />
             </div>
             <div>
-              <p className="text-sm font-medium text-cyan-700">Data Import</p>
-              <h1 className="mt-1 text-2xl font-semibold tracking-normal text-slate-950">导入中心</h1>
+              <p className="text-sm font-medium text-brand-600">Data Import</p>
+              <h1 className="mt-1 text-2xl font-semibold tracking-normal text-foreground">导入中心</h1>
               <p className="mt-2 text-sm text-slate-500">
                 汇总商品、SKU 库存、经营数据和平台字段映射模板，后续承接导入预览和错误行提示。
               </p>
@@ -61,17 +61,17 @@ export default function ImportCenterPage() {
             <div key={template.href} className="panel p-5">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex gap-3">
-                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-cyan-50 text-cyan-700">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-50 text-brand-600">
                     <FileSpreadsheet className="h-5 w-5" aria-hidden="true" />
                   </div>
                   <div>
-                    <h2 className="text-base font-semibold text-slate-950">{template.title}</h2>
+                    <h2 className="text-base font-semibold text-foreground">{template.title}</h2>
                     <p className="mt-1 text-sm leading-6 text-slate-500">{template.description}</p>
                   </div>
                 </div>
                 <Link
                   href={template.href}
-                  className="inline-flex h-9 shrink-0 items-center gap-2 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+                  className="inline-flex h-9 shrink-0 items-center gap-2 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
                 >
                   <Download className="h-3.5 w-3.5" aria-hidden="true" />
                   下载
@@ -86,7 +86,7 @@ export default function ImportCenterPage() {
         <PerformanceImportCenterPanel />
 
         <section className="panel p-5">
-          <h2 className="text-lg font-semibold text-slate-950">已接入能力</h2>
+          <h2 className="text-lg font-semibold text-foreground">已接入能力</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-3">
             <StatusCard title="经营数据 CSV" status="已支持预览" />
             <StatusCard title="字段映射模板" status="已提供" />
@@ -101,8 +101,8 @@ export default function ImportCenterPage() {
 /** 渲染 StatusCard 组件，集中展示状态卡片所需的数据、状态和操作入口。 */
 function StatusCard({ title, status }: { title: string; status: string }) {
   return (
-    <div className="rounded-md border border-slate-200 bg-slate-50 p-4">
-      <p className="text-sm font-semibold text-slate-950">{title}</p>
+    <div className="rounded-md border border-border-subtle bg-surface-muted p-4">
+      <p className="text-sm font-semibold text-foreground">{title}</p>
       <p className="mt-2 text-sm text-slate-500">{status}</p>
     </div>
   );

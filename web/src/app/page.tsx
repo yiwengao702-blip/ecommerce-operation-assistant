@@ -44,7 +44,7 @@ const platformFilters: Array<{ value: "all" | Platform; label: string }> = [
 
 const workflow = [
   { title: "建店建档", icon: Building2, tone: "bg-brand-50 text-brand-600", href: "/" },
-  { title: "导入数据", icon: ClipboardList, tone: "bg-sky-50 text-sky-600", href: "/imports" },
+  { title: "导入数据", icon: ClipboardList, tone: "bg-brand-50 text-brand-600", href: "/imports" },
   { title: "补商品信息", icon: ImageIcon, tone: "bg-emerald-50 text-emerald-600", href: "/?workflow=product" },
   { title: "投放建议", icon: Megaphone, tone: "bg-amber-50 text-amber-600", href: "/?workflow=ads" },
   { title: "周期复盘", icon: FileText, tone: "bg-rose-50 text-rose-600", href: "/?workflow=review" },

@@ -61,12 +61,12 @@ export default async function StorePage({ params, searchParams }: StorePageProps
   const canEdit = Boolean(currentUser?.permissions.can_edit);
 
   return (
-    <main className="min-h-screen bg-[#f7f8fb] px-5 py-6 text-slate-950 lg:px-8">
+    <main className="min-h-screen bg-background px-5 py-6 text-foreground lg:px-8">
       <div className="mx-auto flex max-w-7xl flex-col gap-6">
         <div>
           <Link
             href="/"
-            className="inline-flex h-9 items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+            className="inline-flex h-9 items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-surface-muted"
           >
             <ArrowLeft className="h-4 w-4" aria-hidden="true" />
             返回工作台
@@ -76,18 +76,18 @@ export default async function StorePage({ params, searchParams }: StorePageProps
         <header className="panel p-5">
           <div className="flex flex-col gap-5 lg:flex-row lg:items-center lg:justify-between">
             <div className="flex items-start gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-cyan-700 text-white">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md bg-brand-700 text-white">
                 <StoreIcon className="h-6 w-6" aria-hidden="true" />
               </div>
               <div>
-                <p className="text-sm font-medium text-cyan-700">{platformLabels[store.platform]}</p>
-                <h1 className="mt-1 text-2xl font-semibold tracking-normal text-slate-950">{store.name}</h1>
+                <p className="text-sm font-medium text-brand-600">{platformLabels[store.platform]}</p>
+                <h1 className="mt-1 text-2xl font-semibold tracking-normal text-foreground">{store.name}</h1>
                 <p className="mt-2 text-sm text-slate-500">
                   {store.owner_name ? `负责人：${store.owner_name}` : "未设置负责人"}
                 </p>
               </div>
             </div>
-            <span className="inline-flex h-8 w-fit items-center rounded-md bg-slate-100 px-3 text-xs font-medium text-slate-600">
+            <span className="inline-flex h-8 w-fit items-center rounded-md bg-surface-muted px-3 text-xs font-medium text-slate-600">
               {store.status === "active" ? "启用" : store.status === "paused" ? "暂停" : "关闭"}
             </span>
           </div>
@@ -110,7 +110,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
                   <AlertTriangle className="h-5 w-5" aria-hidden="true" />
                 </div>
                 <div>
-                  <h2 className="text-base font-semibold text-slate-950">库存异常提示</h2>
+                  <h2 className="text-base font-semibold text-foreground">库存异常提示</h2>
                   <p className="mt-1 text-sm text-amber-900">
                     {lowStockRows.length} 个 SKU 可用库存已低于或等于预警线，建议优先补货或调整投放节奏。
                   </p>
@@ -130,7 +130,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
                   href={`/products/${row.product_id}?tab=overview`}
                   className="rounded-md border border-amber-200 bg-white px-3 py-2 text-sm hover:bg-amber-50"
                 >
-                  <span className="font-medium text-slate-950">{row.product_name}</span>
+                  <span className="font-medium text-foreground">{row.product_name}</span>
                   <span className="ml-2 text-slate-600">{row.sku_code}</span>
                   <span className="ml-2 text-amber-800">可用 {row.available_quantity}</span>
                 </Link>
@@ -151,14 +151,14 @@ export default async function StorePage({ params, searchParams }: StorePageProps
             </div>
             <Link
               href={`/?store=${store.id}`}
-              className="inline-flex h-9 items-center panel px-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+              className="inline-flex h-9 items-center panel px-3 text-sm font-medium text-slate-700 hover:bg-surface-muted"
             >
               回首页筛选
             </Link>
           </div>
 
-          <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-            <div className="hidden grid-cols-[1.4fr_0.8fr_0.8fr_1fr_96px] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
+          <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+            <div className="hidden grid-cols-[1.4fr_0.8fr_0.8fr_1fr_96px] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
               <span>商品</span>
               <span>平台状态</span>
               <span>售价</span>
@@ -170,7 +170,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
                 这个店铺还没有绑定商品，可以回到首页创建商品并选择该店铺。
               </div>
             ) : (
-              <div className="divide-y divide-slate-200">
+              <div className="divide-y divide-border-subtle">
                 {storeProducts.map((product) => (
                   <StoreProductRow key={product.id} product={product} />
                 ))}
@@ -185,7 +185,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
               <h2 className="text-lg font-semibold">库存概览</h2>
               <p className="mt-1 text-sm text-slate-500">按 SKU 汇总库存、锁定量、可用量和低库存风险</p>
             </div>
-            <span className="inline-flex h-8 items-center rounded-md bg-slate-100 px-3 text-xs font-medium text-slate-600">
+            <span className="inline-flex h-8 items-center rounded-md bg-surface-muted px-3 text-xs font-medium text-slate-600">
               低库存 {inventorySummary?.low_stock_count ?? 0}
             </span>
           </div>
@@ -194,8 +194,8 @@ export default async function StorePage({ params, searchParams }: StorePageProps
               href={`/stores/${store.id}`}
               className={`inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium ${
                 query.inventory === "low"
-                  ? "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
-                  : "border-cyan-700 bg-cyan-700 text-white"
+                  ? "border-border-subtle bg-white text-slate-700 hover:bg-surface-muted"
+                  : "border-brand-700 bg-brand-700 text-white"
               }`}
             >
               全部库存
@@ -204,16 +204,16 @@ export default async function StorePage({ params, searchParams }: StorePageProps
               href={`/stores/${store.id}?inventory=low`}
               className={`inline-flex h-8 items-center rounded-md border px-3 text-xs font-medium ${
                 query.inventory === "low"
-                  ? "border-cyan-700 bg-cyan-700 text-white"
-                  : "border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+                  ? "border-brand-700 bg-brand-700 text-white"
+                  : "border-border-subtle bg-white text-slate-700 hover:bg-surface-muted"
               }`}
             >
               低库存
             </Link>
           </div>
 
-          <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-            <div className="hidden grid-cols-[1.2fr_0.9fr_0.7fr_0.7fr_0.7fr_0.8fr] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
+          <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+            <div className="hidden grid-cols-[1.2fr_0.9fr_0.7fr_0.7fr_0.7fr_0.8fr] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
               <span>SKU</span>
               <span>商品</span>
               <span>现货</span>
@@ -228,7 +228,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
                   : "这个店铺还没有 SKU 库存数据，后续可从商品详情创建 SKU 并登记库存。"}
               </div>
             ) : (
-              <div className="divide-y divide-slate-200">
+              <div className="divide-y divide-border-subtle">
                 {inventoryRows.map((row) => (
                   <InventoryRow key={row.sku_id} row={row} />
                 ))}
@@ -243,13 +243,13 @@ export default async function StorePage({ params, searchParams }: StorePageProps
               <h2 className="text-lg font-semibold">库存流水</h2>
               <p className="mt-1 text-sm text-slate-500">集中查看店铺最近库存变化</p>
             </div>
-            <span className="inline-flex h-8 items-center rounded-md bg-slate-100 px-3 text-xs font-medium text-slate-600">
+            <span className="inline-flex h-8 items-center rounded-md bg-surface-muted px-3 text-xs font-medium text-slate-600">
               最近 {inventoryMovements.length}
             </span>
           </div>
 
-          <div className="mt-5 overflow-hidden rounded-md border border-slate-200">
-            <div className="hidden grid-cols-[0.8fr_1fr_0.9fr_0.7fr_0.7fr_1fr] bg-slate-50 px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
+          <div className="mt-5 overflow-hidden rounded-md border border-border-subtle">
+            <div className="hidden grid-cols-[0.8fr_1fr_0.9fr_0.7fr_0.7fr_1fr] bg-surface-muted px-4 py-3 text-xs font-semibold text-slate-500 lg:grid">
               <span>类型</span>
               <span>商品</span>
               <span>SKU</span>
@@ -260,7 +260,7 @@ export default async function StorePage({ params, searchParams }: StorePageProps
             {inventoryMovements.length === 0 ? (
               <div className="px-4 py-10 text-center text-sm text-slate-500">暂无库存流水。</div>
             ) : (
-              <div className="divide-y divide-slate-200">
+              <div className="divide-y divide-border-subtle">
                 {inventoryMovements.map((movement) => (
                   <InventoryMovementRow key={movement.id} movement={movement} />
                 ))}
@@ -289,7 +289,7 @@ function MetricCard({
         <p className="text-xs text-slate-500">{label}</p>
         <Icon className="h-4 w-4 text-slate-400" aria-hidden="true" />
       </div>
-      <p className="mt-2 text-xl font-semibold text-slate-950">{value}</p>
+      <p className="mt-2 text-xl font-semibold text-foreground">{value}</p>
     </div>
   );
 }
@@ -310,17 +310,17 @@ function StoreWorkflowPanel({ steps }: { steps: StoreWorkflowStep[] }) {
     <section className="panel p-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div className="flex items-start gap-3">
-          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-cyan-700 text-white">
+          <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-md bg-brand-700 text-white">
             <ClipboardList className="h-5 w-5" aria-hidden="true" />
           </div>
           <div>
-            <h2 className="text-base font-semibold text-slate-950">店铺运营流程</h2>
+            <h2 className="text-base font-semibold text-foreground">店铺运营流程</h2>
             <p className="mt-1 text-sm text-slate-500">{nextStep.done ? "店铺基础流程已跑通。" : `下一步：${nextStep.title}`}</p>
           </div>
         </div>
         <Link
           href={nextStep.href}
-          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-slate-950 px-3 text-sm font-medium text-white hover:bg-slate-800"
+          className="inline-flex h-9 w-fit items-center gap-2 rounded-md bg-brand-900 px-3 text-sm font-medium text-white hover:bg-brand-800"
         >
           继续处理
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -333,11 +333,11 @@ function StoreWorkflowPanel({ steps }: { steps: StoreWorkflowStep[] }) {
             key={step.key}
             href={step.href}
             className={`rounded-md border px-3 py-3 transition ${
-              step.done ? "border-emerald-100 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
+              step.done ? "border-emerald-100 bg-emerald-50" : "border-border-subtle bg-white hover:bg-surface-muted"
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-medium text-slate-950">{step.title}</p>
+              <p className="text-sm font-medium text-foreground">{step.title}</p>
               {step.done ? (
                 <CheckCircle2 className="h-4 w-4 text-emerald-700" aria-hidden="true" />
               ) : (
@@ -442,12 +442,12 @@ function InventoryWorkflowPanel({
     <section className="panel p-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-slate-950">库存处理流程</h2>
+          <h2 className="text-lg font-semibold text-foreground">库存处理流程</h2>
           <p className="mt-1 text-sm text-slate-500">围绕低库存、销量数据、补货建议和人工确认推进</p>
         </div>
         <Link
           href={hasLowStock ? `/stores/${storeId}?inventory=low` : "/imports"}
-          className="inline-flex h-9 w-fit items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-slate-50"
+          className="inline-flex h-9 w-fit items-center gap-2 panel px-3 text-sm font-medium text-slate-700 hover:bg-surface-muted"
         >
           {hasLowStock ? "查看低库存" : "导入经营数据"}
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
@@ -460,11 +460,11 @@ function InventoryWorkflowPanel({
             key={step.title}
             href={step.href}
             className={`rounded-md border px-3 py-3 transition ${
-              step.done ? "border-emerald-100 bg-emerald-50" : "border-slate-200 bg-white hover:bg-slate-50"
+              step.done ? "border-emerald-100 bg-emerald-50" : "border-border-subtle bg-white hover:bg-surface-muted"
             }`}
           >
             <div className="flex items-center justify-between gap-2">
-              <p className="text-sm font-medium text-slate-950">{step.title}</p>
+              <p className="text-sm font-medium text-foreground">{step.title}</p>
               {step.done ? (
                 <CheckCircle2 className="h-4 w-4 text-emerald-700" aria-hidden="true" />
               ) : (
@@ -484,7 +484,7 @@ function StoreProductRow({ product }: { product: Product }) {
   return (
     <div className="grid gap-3 px-4 py-4 text-sm lg:min-h-16 lg:grid-cols-[1.4fr_0.8fr_0.8fr_1fr_96px] lg:items-center lg:gap-0 lg:py-3">
       <div>
-        <p className="font-medium text-slate-950">{product.name}</p>
+        <p className="font-medium text-foreground">{product.name}</p>
         <p className="mt-1 text-xs text-slate-500">{product.category ?? "未分类"}</p>
       </div>
       <span className="text-slate-600">{product.platform_status ?? "未同步"}</span>
@@ -498,7 +498,7 @@ function StoreProductRow({ product }: { product: Product }) {
       </div>
       <Link
         href={`/products/${product.id}`}
-        className="inline-flex h-9 w-24 items-center justify-center gap-1.5 panel px-3 text-xs font-medium text-slate-700 hover:bg-slate-50"
+        className="inline-flex h-9 w-24 items-center justify-center gap-1.5 panel px-3 text-xs font-medium text-slate-700 hover:bg-surface-muted"
       >
         进入
         <ArrowRight className="h-3.5 w-3.5" aria-hidden="true" />
@@ -512,7 +512,7 @@ function InventoryRow({ row }: { row: StoreInventoryRow }) {
   return (
     <div className="grid gap-3 px-4 py-4 text-sm lg:min-h-16 lg:grid-cols-[1.2fr_0.9fr_0.7fr_0.7fr_0.7fr_0.8fr] lg:items-center lg:gap-0 lg:py-3">
       <div>
-        <p className="font-medium text-slate-950">{row.sku_name}</p>
+        <p className="font-medium text-foreground">{row.sku_name}</p>
         <p className="mt-1 text-xs text-slate-500">{row.sku_code}</p>
       </div>
       <span className="text-slate-600">{row.product_name}</span>
@@ -534,8 +534,8 @@ function InventoryRow({ row }: { row: StoreInventoryRow }) {
 function InventoryMovementRow({ movement }: { movement: StoreInventoryMovementRow }) {
   return (
     <div className="grid gap-3 px-4 py-3 text-sm lg:min-h-14 lg:grid-cols-[0.8fr_1fr_0.9fr_0.7fr_0.7fr_1fr] lg:items-center lg:gap-0">
-      <span className="font-medium text-slate-900">{movementTypeLabel(movement.movement_type)}</span>
-      <Link href={`/products/${movement.product_id}?tab=overview`} className="text-sky-700 hover:text-sky-900">
+      <span className="font-medium text-foreground">{movementTypeLabel(movement.movement_type)}</span>
+      <Link href={`/products/${movement.product_id}?tab=overview`} className="text-brand-700 hover:text-brand-900">
         {movement.product_name}
       </Link>
       <span className="text-slate-600">{movement.sku_code}</span>

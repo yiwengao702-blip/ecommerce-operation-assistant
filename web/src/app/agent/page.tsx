@@ -53,7 +53,7 @@ const statusTones: Record<AgentTaskStatus, string> = {
 };
 
 const riskTones: Record<AgentRiskLevel, string> = {
-  R0: "bg-sky-50 text-sky-700",
+  R0: "bg-brand-50 text-brand-700",
   R1: "bg-emerald-50 text-emerald-700",
   R2: "bg-amber-50 text-amber-700",
   R3: "bg-rose-50 text-rose-700",
@@ -133,7 +133,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
                     </option>
                   ))}
                 </select>
-                <button className="ml-2 h-9 panel px-3 text-sm font-medium hover:bg-slate-50">
+                <button className="ml-2 h-9 panel px-3 text-sm font-medium hover:bg-surface-muted">
                   切换
                 </button>
               </form>
@@ -177,7 +177,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
                 required
                 disabled={!canEdit}
                 placeholder="例如：检查这款商品近期的库存和经营风险，并给出下一步建议"
-                className="min-h-28 w-full rounded-md border border-border-strong bg-surface px-3 py-3 text-sm outline-none focus:border-cyan-600 focus:ring-2 focus:ring-cyan-100 disabled:bg-surface-muted"
+                className="min-h-28 w-full rounded-md border border-border-strong bg-surface px-3 py-3 text-sm outline-none focus:border-brand-600 focus:ring-2 focus:ring-brand-100 disabled:bg-surface-muted"
               />
               <ContextSelectors products={products} stores={stores} disabled={!canEdit} />
               <button type="submit" disabled={!canEdit} className="inline-flex h-10 items-center gap-2 rounded-md bg-gradient-to-r from-brand-700 to-brand-800 px-4 text-sm font-medium text-white hover:from-brand-600 hover:to-brand-700 disabled:cursor-not-allowed disabled:bg-slate-300">
@@ -230,7 +230,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
                 <h3 className="mt-4 font-semibold">{workflow.title}</h3>
                 <p className="mt-2 min-h-10 text-sm leading-5 text-slate-500">{workflow.description}</p>
                 <div className="mt-3"><ContextSelectors products={products} stores={stores} compact disabled={!canEdit} /></div>
-                <button type="submit" disabled={!canEdit} className="mt-4 inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-subtle px-3 text-sm font-medium hover:bg-slate-50 disabled:text-slate-400">
+                <button type="submit" disabled={!canEdit} className="mt-4 inline-flex h-9 items-center justify-center gap-2 rounded-md border border-border-subtle px-3 text-sm font-medium hover:bg-surface-muted disabled:text-slate-400">
                   启动工作流 <ArrowRight className="h-4 w-4" aria-hidden="true" />
                 </button>
               </form>
@@ -252,7 +252,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
                     <div className="flex items-center gap-2"><span className={`rounded-md px-2 py-1 text-xs font-medium ${riskTones[task.risk_level]}`}>{task.risk_level}</span><span className={`rounded-md px-2 py-1 text-xs font-medium ${statusTones[task.status]}`}>{statusLabels[task.status]}</span></div>
                   </div>
                 </summary>
-                <div className="mt-4 grid gap-4 border-t border-slate-100 pt-4 lg:grid-cols-2">
+                <div className="mt-4 grid gap-4 border-t border-border-subtle pt-4 lg:grid-cols-2">
                   <JsonPanel title="上下文" value={task.context_scope} />
                   <JsonPanel title="结果摘要" value={task.result_summary} />
                 </div>
@@ -329,17 +329,17 @@ function Metric({ icon: Icon, label, value, tone = "text-brand-600" }: { icon: t
 
 /** 渲染 JsonPanel 组件，集中展示json面板所需的数据、状态和操作入口。 */
 function JsonPanel({ title, value }: { title: string; value: Record<string, unknown> }) {
-  return <div className="rounded-md bg-slate-50 p-3"><p className="text-xs font-semibold text-slate-500">{title}</p><pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap text-xs leading-5 text-slate-700">{Object.keys(value).length ? JSON.stringify(value, null, 2) : "暂无"}</pre></div>;
+  return <div className="rounded-md bg-surface-muted p-3"><p className="text-xs font-semibold text-slate-500">{title}</p><pre className="mt-2 max-h-64 overflow-auto whitespace-pre-wrap text-xs leading-5 text-slate-700">{Object.keys(value).length ? JSON.stringify(value, null, 2) : "暂无"}</pre></div>;
 }
 
 /** 渲染 EmptyText 组件，集中展示空状态文本所需的数据、状态和操作入口。 */
 function EmptyText({ text }: { text: string }) { return <div className="rounded-md border border-dashed border-border-strong px-4 py-8 text-center text-sm text-slate-500">{text}</div>; }
 
 /** 渲染 EmptyWorkspace 组件，集中展示空状态Workspace所需的数据、状态和操作入口。 */
-function EmptyWorkspace() { return <main className="flex min-h-screen items-center justify-center bg-slate-50 p-6"><div className="max-w-lg panel p-8 text-center"><Bot className="mx-auto h-8 w-8 text-slate-400" /><h1 className="mt-4 text-xl font-semibold">暂无可用 Workspace</h1><p className="mt-2 text-sm text-slate-500">请先运行数据库迁移并为当前用户创建 WorkspaceMembership。</p></div></main>; }
+function EmptyWorkspace() { return <main className="flex min-h-screen items-center justify-center bg-surface-muted p-6"><div className="max-w-lg panel p-8 text-center"><Bot className="mx-auto h-8 w-8 text-slate-400" /><h1 className="mt-4 text-xl font-semibold">暂无可用 Workspace</h1><p className="mt-2 text-sm text-slate-500">请先运行数据库迁移并为当前用户创建 WorkspaceMembership。</p></div></main>; }
 
 /** 渲染 AgentServiceError 组件，集中展示Agent服务错误所需的数据、状态和操作入口。 */
-function AgentServiceError() { return <main className="flex min-h-screen items-center justify-center bg-slate-50 p-6"><div className="max-w-lg rounded-md border border-rose-200 bg-surface p-8 text-center"><XCircle className="mx-auto h-8 w-8 text-rose-600" /><h1 className="mt-4 text-xl font-semibold">Agent 服务暂不可用</h1><p className="mt-2 text-sm text-slate-500">请求未被伪装为空数据，请检查 API、权限或基础设施状态后重试。</p></div></main>; }
+function AgentServiceError() { return <main className="flex min-h-screen items-center justify-center bg-surface-muted p-6"><div className="max-w-lg rounded-md border border-rose-200 bg-surface p-8 text-center"><XCircle className="mx-auto h-8 w-8 text-rose-600" /><h1 className="mt-4 text-xl font-semibold">Agent 服务暂不可用</h1><p className="mt-2 text-sm text-slate-500">请求未被伪装为空数据，请检查 API、权限或基础设施状态后重试。</p></div></main>; }
 
 /** 渲染 ResultBanner 组件，集中展示结果提示横幅所需的数据、状态和操作入口。 */
 function ResultBanner({ result }: { result: string }) {
