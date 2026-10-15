@@ -19,7 +19,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
         <input
           name="title"
           defaultValue={plan.title}
-          className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+          className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
         />
       </label>
 
@@ -29,7 +29,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           <input
             name="headline"
             defaultValue={planText(plan.content, "headline")}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
         <label className="grid gap-1.5">
@@ -37,7 +37,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           <input
             name="sub_headline"
             defaultValue={planText(plan.content, "sub_headline")}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
       </div>
@@ -48,7 +48,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           name="angle"
           defaultValue={planText(plan.content, "angle")}
           rows={2}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -58,7 +58,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           name="layout"
           defaultValue={planText(plan.content, "layout")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -68,7 +68,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           name="visual_focus"
           defaultValue={planText(plan.content, "visual_focus")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -78,7 +78,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           name="proof_points"
           defaultValue={planList(plan.content, "proof_points").join("\n")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -88,7 +88,7 @@ export function MainImagePlanEditForm({ productId, plan }: MainImagePlanEditForm
           name="image_prompt"
           defaultValue={planText(plan.content, "image_prompt")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 

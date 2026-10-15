@@ -287,7 +287,7 @@ function MetricCard({
     <div className="panel p-4">
       <div className="flex items-center justify-between gap-3">
         <p className="text-xs text-slate-500">{label}</p>
-        <Icon className="h-4 w-4 text-slate-400" aria-hidden="true" />
+        <Icon className="h-4 w-4 text-slate-500" aria-hidden="true" />
       </div>
       <p className="mt-2 text-xl font-semibold text-foreground">{value}</p>
     </div>

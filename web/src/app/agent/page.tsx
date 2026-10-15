@@ -241,7 +241,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
         <section id="task-center" className="panel p-5">
           <div className="flex items-center justify-between gap-4">
             <div><h2 className="text-lg font-semibold">任务中心</h2><p className="mt-1 text-sm text-slate-500">Task 表达业务目标，Run 表达实际执行和重试。</p></div>
-            <Clock3 className="h-5 w-5 text-slate-400" aria-hidden="true" />
+            <Clock3 className="h-5 w-5 text-slate-500" aria-hidden="true" />
           </div>
           <div className="mt-5 space-y-3">
             {tasks.length === 0 ? <EmptyText text="还没有 Agent Task。" /> : tasks.map((task) => (
@@ -336,7 +336,7 @@ function JsonPanel({ title, value }: { title: string; value: Record<string, unkn
 function EmptyText({ text }: { text: string }) { return <div className="rounded-md border border-dashed border-border-strong px-4 py-8 text-center text-sm text-slate-500">{text}</div>; }
 
 /** 渲染 EmptyWorkspace 组件，集中展示空状态Workspace所需的数据、状态和操作入口。 */
-function EmptyWorkspace() { return <main className="flex min-h-screen items-center justify-center bg-surface-muted p-6"><div className="max-w-lg panel p-8 text-center"><Bot className="mx-auto h-8 w-8 text-slate-400" /><h1 className="mt-4 text-xl font-semibold">暂无可用 Workspace</h1><p className="mt-2 text-sm text-slate-500">请先运行数据库迁移并为当前用户创建 WorkspaceMembership。</p></div></main>; }
+function EmptyWorkspace() { return <main className="flex min-h-screen items-center justify-center bg-surface-muted p-6"><div className="max-w-lg panel p-8 text-center"><Bot className="mx-auto h-8 w-8 text-slate-500" /><h1 className="mt-4 text-xl font-semibold">暂无可用 Workspace</h1><p className="mt-2 text-sm text-slate-500">请先运行数据库迁移并为当前用户创建 WorkspaceMembership。</p></div></main>; }
 
 /** 渲染 AgentServiceError 组件，集中展示Agent服务错误所需的数据、状态和操作入口。 */
 function AgentServiceError() { return <main className="flex min-h-screen items-center justify-center bg-surface-muted p-6"><div className="max-w-lg rounded-md border border-rose-200 bg-surface p-8 text-center"><XCircle className="mx-auto h-8 w-8 text-rose-600" /><h1 className="mt-4 text-xl font-semibold">Agent 服务暂不可用</h1><p className="mt-2 text-sm text-slate-500">请求未被伪装为空数据，请检查 API、权限或基础设施状态后重试。</p></div></main>; }

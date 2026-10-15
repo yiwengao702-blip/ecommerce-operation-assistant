@@ -18,7 +18,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
         <input
           name="title"
           defaultValue={script.title}
-          className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+          className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
         />
       </label>
 
@@ -28,7 +28,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="angle"
           defaultValue={planText(script.content, "angle")}
           rows={2}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -38,7 +38,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           <input
             name="hook"
             defaultValue={planText(script.content, "hook")}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
         <label className="grid gap-1.5">
@@ -49,7 +49,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
             min={15}
             max={60}
             defaultValue={planValue(script.content, "duration_seconds")}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
       </div>
@@ -61,7 +61,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="scenes_json"
           defaultValue={JSON.stringify(planScenes(script.content), null, 2)}
           rows={10}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 font-mono text-xs leading-5 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 font-mono text-xs leading-5 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -71,7 +71,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="selling_point_proof"
           defaultValue={planList(script.content, "selling_point_proof").join("\n")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -81,7 +81,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="cta"
           defaultValue={planText(script.content, "cta")}
           rows={2}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -91,7 +91,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="video_prompt"
           defaultValue={planText(script.content, "video_prompt")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -103,7 +103,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           defaultValue={planList(script.content, "reference_images").join("\n")}
           rows={3}
           placeholder="每行一张参考图，用于图生视频或保持商品外观一致"
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -114,7 +114,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
             name="subtitle_lines"
             defaultValue={planList(script.content, "subtitle_lines").join("\n")}
             rows={4}
-            className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+            className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
           />
         </label>
         <label className="grid gap-1.5">
@@ -123,7 +123,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
             name="voiceover_text"
             defaultValue={planText(script.content, "voiceover_text")}
             rows={4}
-            className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+            className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
           />
         </label>
       </div>
@@ -134,7 +134,7 @@ export function VideoScriptEditForm({ productId, script }: VideoScriptEditFormPr
           name="edit_notes"
           defaultValue={planText(script.content, "edit_notes")}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 

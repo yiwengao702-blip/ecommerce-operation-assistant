@@ -30,7 +30,7 @@ export function StoreCreateForm() {
         <input
           name="name"
           required
-          className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+          className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="例如：抖音旗舰店"
         />
       </label>
@@ -55,7 +55,7 @@ export function StoreCreateForm() {
           <span className="text-sm font-medium text-slate-700">负责人</span>
           <input
             name="owner_name"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
             placeholder="运营负责人"
           />
         </label>

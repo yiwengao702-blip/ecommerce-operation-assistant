@@ -20,7 +20,7 @@ export function DiagnosisEditForm({ diagnosis, productId }: DiagnosisEditFormPro
           name="positioning"
           defaultValue={diagnosis.positioning}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -30,7 +30,7 @@ export function DiagnosisEditForm({ diagnosis, productId }: DiagnosisEditFormPro
           name="price_band"
           defaultValue={diagnosis.price_band}
           rows={2}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -70,7 +70,7 @@ function ListField({
         name={name}
         defaultValue={items.join("\n")}
         rows={4}
-        className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+        className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
       />
     </label>
   );

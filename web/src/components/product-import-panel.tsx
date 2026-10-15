@@ -99,7 +99,7 @@ export function CsvImportPanel({
             type="button"
             onClick={() => submitImport(false)}
             disabled={loading}
-            className="inline-flex h-9 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-400"
+            className="inline-flex h-9 items-center gap-2 rounded-md border border-slate-200 bg-white px-3 text-sm font-medium text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:text-slate-500"
           >
             {loading ? <Loader2 className="h-4 w-4 animate-spin" aria-hidden="true" /> : null}
             预览
@@ -116,7 +116,7 @@ export function CsvImportPanel({
       </div>
 
       <label className="mt-5 block rounded-md border border-dashed border-slate-300 bg-slate-50 px-4 py-6 text-center">
-        <Upload className="mx-auto h-6 w-6 text-slate-400" aria-hidden="true" />
+        <Upload className="mx-auto h-6 w-6 text-slate-500" aria-hidden="true" />
         <span className="mt-2 block text-sm font-medium text-slate-700">{fileLabel}</span>
         <input type="file" accept=".csv,text/csv" onChange={handleFileChange} className="sr-only" />
       </label>

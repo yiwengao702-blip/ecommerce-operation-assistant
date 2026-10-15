@@ -711,7 +711,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                       name="confirmation_note"
                       defaultValue={latestAdRecommendation.confirmation_note ?? ""}
                       rows={2}
-                      className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
+                      className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-500"
                       placeholder="记录确认人判断、预算边界或暂不执行原因"
                     />
                   </label>
@@ -868,7 +868,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                               min="1"
                               max="5"
                               defaultValue={asset.rating ?? ""}
-                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-500"
                             />
                           </label>
                           <label className="grid gap-1.5">
@@ -876,7 +876,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             <select
                               name="status"
                               defaultValue={asset.status || "待评估"}
-                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-500"
                             >
                               <option value="待评估">待评估</option>
                               <option value="通过">通过</option>
@@ -893,7 +893,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                               type="number"
                               min="1"
                               defaultValue={asset.assetVersion}
-                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-500"
                             />
                           </label>
                           <label className="grid gap-1.5">
@@ -901,7 +901,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             <input
                               name="usage_contexts"
                               defaultValue={asset.usageContexts.join("，")}
-                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
+                              className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-500"
                               placeholder="冷启动，人群测试，复测"
                             />
                           </label>
@@ -911,7 +911,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           <input
                             name="tags"
                             defaultValue={asset.tags.join("，")}
-                            className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-400"
+                            className="h-9 rounded-md border border-border-subtle px-2 text-sm outline-none focus:border-slate-500"
                             placeholder="通勤，控油，高点击潜力"
                           />
                         </label>
@@ -921,7 +921,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             name="note"
                             defaultValue={asset.note}
                             rows={2}
-                            className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-400"
+                            className="resize-y rounded-md border border-border-subtle px-2 py-2 text-sm leading-5 outline-none focus:border-slate-500"
                             placeholder="记录适合投放的人群、需要优化的问题或复盘观察"
                           />
                         </label>
@@ -2685,7 +2685,7 @@ function CompetitorMonitorPanel({
                     <button
                       type="submit"
                       disabled={!competitor.url}
-                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-white px-3 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-surface-muted disabled:cursor-not-allowed disabled:text-slate-400"
+                      className="inline-flex h-9 items-center justify-center gap-2 rounded-md bg-white px-3 text-xs font-semibold text-slate-700 ring-1 ring-slate-200 transition hover:bg-surface-muted disabled:cursor-not-allowed disabled:text-slate-500"
                     >
                       启用
                     </button>

@@ -35,7 +35,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
         <input
           name="name"
           required
-          className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+          className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="例如：低糖燕麦饼干"
         />
       </label>
@@ -45,7 +45,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
           <span className="text-sm font-medium text-slate-700">所属店铺</span>
           <select
             name="store_id"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           >
             <option value="">暂不绑定</option>
             {stores.map((store) => (
@@ -61,7 +61,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
           <select
             name="platform"
             defaultValue="douyin"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           >
             {platforms.map((platform) => (
               <option key={platform.value} value={platform.value}>
@@ -75,7 +75,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
           <span className="text-sm font-medium text-slate-700">类目</span>
           <input
             name="category"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
             placeholder="食品 / 家居 / 美妆"
           />
         </label>
@@ -86,7 +86,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
           <span className="text-sm font-medium text-slate-700">售价</span>
           <input
             name="price"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
             placeholder="29.90"
             inputMode="decimal"
           />
@@ -96,7 +96,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
           <span className="text-sm font-medium text-slate-700">目标人群</span>
           <input
             name="target_audience"
-            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+            className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
             placeholder="年轻上班族"
           />
         </label>
@@ -106,7 +106,7 @@ export function ProductCreateForm({ stores = [] }: ProductCreateFormProps) {
         <span className="text-sm font-medium text-slate-700">核心卖点</span>
         <textarea
           name="selling_points"
-          className="mt-2 min-h-24 w-full resize-y rounded-md border border-border-strong bg-surface px-3 py-3 text-sm text-foreground outline-none transition placeholder:text-slate-400 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+          className="mt-2 min-h-24 w-full resize-y rounded-md border border-border-strong bg-surface px-3 py-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
           placeholder="用逗号或换行分隔，例如：低糖、饱腹、独立包装"
         />
       </label>

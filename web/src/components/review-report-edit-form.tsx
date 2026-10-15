@@ -21,7 +21,7 @@ export function ReviewReportEditForm({ productId, report }: ReviewReportEditForm
             name="period_start"
             type="date"
             defaultValue={report.period_start}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
         <label className="grid gap-1.5">
@@ -30,7 +30,7 @@ export function ReviewReportEditForm({ productId, report }: ReviewReportEditForm
             name="period_end"
             type="date"
             defaultValue={report.period_end}
-            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-400"
+            className="h-10 rounded-md border border-slate-200 px-3 text-sm outline-none focus:border-slate-500"
           />
         </label>
       </div>
@@ -41,7 +41,7 @@ export function ReviewReportEditForm({ productId, report }: ReviewReportEditForm
           name="summary"
           defaultValue={report.summary}
           rows={3}
-          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+          className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
         />
       </label>
 
@@ -77,7 +77,7 @@ function ListField({
         name={name}
         defaultValue={items.join("\n")}
         rows={5}
-        className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-400"
+        className="resize-y rounded-md border border-slate-200 px-3 py-2 text-sm leading-6 outline-none focus:border-slate-500"
       />
     </label>
   );
