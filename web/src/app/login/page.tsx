@@ -173,7 +173,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             {/* 一键在线演示：免密进入演示账号，浏览内置茶叶示例数据，降低首次体验门槛 */}
             <div className="mt-4 flex items-center gap-3">
               <span className="h-px flex-1 bg-border-subtle" aria-hidden="true" />
-              <span className="text-xs font-medium text-slate-400">或</span>
+              <span className="text-xs font-medium text-slate-500">或</span>
               <span className="h-px flex-1 bg-border-subtle" aria-hidden="true" />
             </div>
 

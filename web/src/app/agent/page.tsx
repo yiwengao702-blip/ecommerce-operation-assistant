@@ -303,7 +303,7 @@ export default async function AgentCenter({ searchParams }: AgentCenterProps) {
           <h2 className="text-lg font-semibold">内部专业 Agent 目录</h2>
           <p className="mt-1 text-sm text-slate-500">用户只与顶层 Agent 交互；专业 Agent 的版本和工具白名单可审计。</p>
           <div className="mt-5 grid gap-3 md:grid-cols-2 xl:grid-cols-4">
-            {catalog?.agents.map((agent) => <div key={agent.key} className="rounded-md border border-border-subtle p-4"><p className="font-medium">{humanizeAgent(agent.key)}</p><p className="mt-1 text-xs text-brand-600">v{agent.version}</p><p className="mt-3 text-sm leading-5 text-slate-500">{agent.description}</p><p className="mt-3 text-xs text-slate-400">{agent.tools.length} 个允许工具</p></div>)}
+            {catalog?.agents.map((agent) => <div key={agent.key} className="rounded-md border border-border-subtle p-4"><p className="font-medium">{humanizeAgent(agent.key)}</p><p className="mt-1 text-xs text-brand-600">v{agent.version}</p><p className="mt-3 text-sm leading-5 text-slate-500">{agent.description}</p><p className="mt-3 text-xs text-slate-500">{agent.tools.length} 个允许工具</p></div>)}
           </div>
         </section>
       </div>

@@ -155,7 +155,7 @@ export function AgentRunPanel({ productId, initialRuns, canEdit }: AgentRunPanel
             <div className="rounded-md border border-slate-200 bg-white p-6">
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+                  <p className="text-xs font-medium uppercase tracking-wide text-slate-500">
                     Run #{latestRun.id} · v{latestRun.workflow_version}
                   </p>
                   <h3 className="mt-1 text-lg font-semibold">专家协作进度</h3>
@@ -256,18 +256,18 @@ export function AgentRunPanel({ productId, initialRuns, canEdit }: AgentRunPanel
                 <div key={event.id} className="border-l-2 border-slate-200 pl-3">
                   <div className="flex items-center justify-between gap-3">
                     <p className="text-sm font-medium text-slate-800">{eventLabel(event.event_type)}</p>
-                    <span className="text-[11px] text-slate-400">{formatTime(event.created_at)}</span>
+                    <span className="text-[11px] text-slate-500">{formatTime(event.created_at)}</span>
                   </div>
                   <p className="mt-1 text-xs leading-5 text-slate-500">
                     {event.message ?? agentLabel(event.agent_name)}
                   </p>
                   {event.metrics.latency_ms ? (
-                    <p className="mt-1 text-[11px] text-slate-400">耗时 {String(event.metrics.latency_ms)} ms</p>
+                    <p className="mt-1 text-[11px] text-slate-500">耗时 {String(event.metrics.latency_ms)} ms</p>
                   ) : null}
                 </div>
               ))
             ) : (
-              <p className="py-8 text-center text-sm text-slate-400">暂无运行事件</p>
+              <p className="py-8 text-center text-sm text-slate-500">暂无运行事件</p>
             )}
           </div>
         </div>
@@ -279,12 +279,12 @@ export function AgentRunPanel({ productId, initialRuns, canEdit }: AgentRunPanel
               <div key={run.id} className="flex items-center justify-between rounded-md bg-slate-50 px-3 py-2.5">
                 <div>
                   <p className="text-sm font-medium">Run #{run.id}</p>
-                  <p className="mt-0.5 text-xs text-slate-400">{formatTime(run.created_at)}</p>
+                  <p className="mt-0.5 text-xs text-slate-500">{formatTime(run.created_at)}</p>
                 </div>
                 <RunStatusBadge status={run.status} compact />
               </div>
             ))}
-            {!runs.length ? <p className="py-6 text-center text-sm text-slate-400">暂无记录</p> : null}
+            {!runs.length ? <p className="py-6 text-center text-sm text-slate-500">暂无记录</p> : null}
           </div>
         </div>
       </aside>

@@ -193,7 +193,7 @@ export function PlatformMappingPanel({
                     打开
                   </a>
                 ) : (
-                  <span className="text-slate-400">-</span>
+                  <span className="text-slate-500">-</span>
                 )}
               </div>
             ))}

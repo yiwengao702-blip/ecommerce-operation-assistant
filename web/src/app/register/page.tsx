@@ -210,7 +210,7 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
             <Link href="/login" className="text-sm text-slate-500 transition hover:text-brand-700">
               已有账号？登录
             </Link>
-            <span className="inline-flex items-center gap-1.5 text-xs text-slate-400">
+            <span className="inline-flex items-center gap-1.5 text-xs text-slate-500">
               <Check className="h-3.5 w-3.5 text-brand-500" aria-hidden="true" />
               企业内网安全连接
             </span>

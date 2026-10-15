@@ -292,7 +292,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                             查看链接
                           </a>
                         ) : (
-                          <p className="mt-1 text-xs text-slate-400">未填链接</p>
+                          <p className="mt-1 text-xs text-slate-500">未填链接</p>
                         )}
                       </div>
                       <span className="text-slate-600">{platformLabels[competitor.platform]}</span>
@@ -1024,7 +1024,7 @@ export default async function ProductDetailPage({ params, searchParams }: Produc
                           </button>
                         </form>
                       ) : (
-                        <span className="text-xs text-slate-400">-</span>
+                        <span className="text-xs text-slate-500">-</span>
                       )}
                     </div>
                   </div>
