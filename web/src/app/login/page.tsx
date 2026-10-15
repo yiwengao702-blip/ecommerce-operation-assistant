@@ -90,7 +90,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </ul>
           </div>
 
-          <p className="text-xs text-brand-200/60">© 2026 电商运营助手 · 企业级智能运营平台</p>
+          <p className="text-xs text-brand-200/80">© 2026 电商运营助手 · 企业级智能运营平台</p>
         </div>
       </aside>
 
@@ -185,7 +185,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 <Play className="h-4 w-4" aria-hidden="true" />
                 在线演示
               </button>
-              <p className="mt-2 text-center text-xs text-slate-400">
+              <p className="mt-2 text-center text-xs text-slate-500">
                 无需注册，直接体验智能运营工作台与示例数据
               </p>
             </form>

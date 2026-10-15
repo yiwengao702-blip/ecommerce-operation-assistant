@@ -44,7 +44,7 @@ export function AppTopbar({ user }: { user: TopbarUser }) {
   if (pathname === "/login" || pathname === "/register") return null;
 
   return (
-    <header className="sticky top-0 z-40 border-b border-[#15264a] bg-gradient-to-r from-brand-800 to-brand-900 text-white">
+    <header className="sticky top-0 z-40 border-b border-white/10 bg-gradient-to-r from-brand-800 to-brand-900 text-white">
       <div className="mx-auto flex h-14 max-w-[1400px] items-center gap-6 px-5 lg:px-8">
         {/* 品牌标识 */}
         <Link href="/" className="flex shrink-0 items-center gap-2.5">
