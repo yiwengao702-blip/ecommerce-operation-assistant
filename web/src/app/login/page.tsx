@@ -8,7 +8,6 @@ import {
   Sparkles,
   Check,
   AlertCircle,
-  Play,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +27,7 @@ function BrandMark() {
         />
       </span>
       <span className="flex flex-col leading-none">
-        <span className="text-base font-semibold tracking-wide text-foreground">电商运营助手</span>
+        <span className="text-base font-semibold tracking-wide text-foreground">万象运营台</span>
         <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.18em] text-brand-500">
           Operation Assistant
         </span>
@@ -90,7 +89,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             </ul>
           </div>
 
-          <p className="text-xs text-brand-200/80">© 2026 电商运营助手 · 企业级智能运营平台</p>
+          <p className="text-xs text-brand-200/80">© 2026 万象运营台 · 企业级智能运营平台</p>
         </div>
       </aside>
 
@@ -169,32 +168,9 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
                 />
               </button>
             </form>
-
-            {/* 一键在线演示：免密进入演示账号，浏览内置茶叶示例数据，降低首次体验门槛 */}
-            <div className="mt-4 flex items-center gap-3">
-              <span className="h-px flex-1 bg-border-subtle" aria-hidden="true" />
-              <span className="text-xs font-medium text-slate-500">或</span>
-              <span className="h-px flex-1 bg-border-subtle" aria-hidden="true" />
-            </div>
-
-            <form action="/login/demo" method="post" className="mt-4">
-              <button
-                type="submit"
-                className="group inline-flex h-11 w-full items-center justify-center gap-2 rounded-md border border-brand-300 bg-brand-50 text-sm font-semibold text-brand-700 transition hover:bg-brand-100 active:translate-y-px"
-              >
-                <Play className="h-4 w-4" aria-hidden="true" />
-                在线演示
-              </button>
-              <p className="mt-2 text-center text-xs text-slate-500">
-                无需注册，直接体验智能运营工作台与示例数据
-              </p>
-            </form>
           </div>
 
-          <div className="mt-5 flex items-center justify-between px-1">
-            <Link href="/" className="text-sm text-slate-500 transition hover:text-brand-700">
-              返回首页
-            </Link>
+          <div className="mt-5 flex items-center justify-end px-1">
             <Link href="/register" className="text-sm text-brand-600 transition hover:text-brand-700">
               还没有账号？注册
             </Link>

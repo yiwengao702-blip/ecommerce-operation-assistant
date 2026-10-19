@@ -53,7 +53,7 @@ export function AppTopbar({ user }: { user: TopbarUser }) {
             <span className="absolute -bottom-0.5 -right-0.5 h-2 w-2 rounded-full bg-gold-400 ring-2 ring-brand-900" aria-hidden="true" />
           </span>
           <span className="flex flex-col leading-none">
-            <span className="text-sm font-semibold tracking-wide">电商运营助手</span>
+            <span className="text-sm font-semibold tracking-wide">万象运营台</span>
             <span className="mt-0.5 text-[10px] font-medium uppercase tracking-[0.18em] text-brand-200">
               Operation Assistant
             </span>

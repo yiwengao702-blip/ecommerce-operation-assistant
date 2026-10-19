@@ -5,7 +5,7 @@ import { getCurrentUser } from "@/lib/api";
 import { getAuthToken } from "@/lib/session";
 
 export const metadata: Metadata = {
-  title: "电商运营助手",
+  title: "万象运营台",
   description: "AI 单品运营工作台",
 };
 

@@ -306,7 +306,7 @@ function UserManagementPanel({ users }: { users: UserAccount[] }) {
 
       <form action="/settings/users/create" method="post" className="mt-5 grid gap-4 lg:grid-cols-[1fr_1fr_180px_180px_auto] lg:items-end">
         <TextInput label="邮箱" name="email" defaultValue="" placeholder="ops@example.com" />
-        <TextInput label="姓名" name="display_name" defaultValue="" placeholder="运营同学" />
+        <TextInput label="姓名" name="display_name" defaultValue="" placeholder="运营" />
         <RoleSelect />
         <label className="block">
           <span className="text-sm font-medium text-slate-700">初始密码</span>

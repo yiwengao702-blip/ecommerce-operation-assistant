@@ -26,7 +26,8 @@ const API_BASE_URL =
 export async function getProducts(): Promise<Product[]> {
   try {
     // 工作台服务端渲染依赖实时运营数据，禁用缓存，避免导入或生成后仍看到旧状态。
-    const response = await fetch(`${API_BASE_URL}/api/v1/products`, {
+    // 显式请求较大分页上限，保证综合演示目录（数十个商品）能完整展示。
+    const response = await fetch(`${API_BASE_URL}/api/v1/products?limit=100`, {
       headers: await authHeaders(),
       cache: "no-store",
     });

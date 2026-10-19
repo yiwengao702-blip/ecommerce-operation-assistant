@@ -9,6 +9,7 @@ import {
   Check,
   AlertCircle,
   UserPlus,
+  User,
 } from "lucide-react";
 import Link from "next/link";
 
@@ -28,7 +29,7 @@ function BrandMark() {
         />
       </span>
       <span className="flex flex-col leading-none">
-        <span className="text-base font-semibold tracking-wide text-foreground">电商运营助手</span>
+        <span className="text-base font-semibold tracking-wide text-foreground">万象运营台</span>
         <span className="mt-1 text-[10px] font-medium uppercase tracking-[0.18em] text-brand-500">
           Operation Assistant
         </span>
@@ -95,9 +96,34 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
                 </li>
               ))}
             </ul>
+
+            {/* 玻璃拟态「经营速览」小卡：给品牌面板一个精致视觉锚点（数据为示例占位） */}
+            <div className="mt-8 rounded-xl border border-white/10 bg-white/5 p-4 shadow-lg shadow-brand-900/20 backdrop-blur-sm">
+              <div className="flex items-center justify-between">
+                <span className="text-xs font-medium text-brand-100/90">今日经营速览</span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-gold-400/15 px-2 py-0.5 text-[10px] font-semibold tracking-wide text-gold-400">
+                  <span className="h-1.5 w-1.5 rounded-full bg-gold-400" aria-hidden="true"></span>
+                  LIVE
+                </span>
+              </div>
+              <div className="mt-3 grid grid-cols-3 gap-3">
+                <div>
+                  <p className="text-lg font-semibold leading-none text-white">32</p>
+                  <p className="mt-1 text-[10px] text-brand-200/80">在售商品</p>
+                </div>
+                <div>
+                  <p className="text-lg font-semibold leading-none text-white">98.2%</p>
+                  <p className="mt-1 text-[10px] text-brand-200/80">库存健康</p>
+                </div>
+                <div>
+                  <p className="text-lg font-semibold leading-none text-white">+36%</p>
+                  <p className="mt-1 text-[10px] text-brand-200/80">周环比</p>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <p className="text-xs text-brand-200/60">© 2026 电商运营助手 · 企业级智能运营平台</p>
+          <p className="text-xs text-brand-200/60">© 2026 万象运营台 · 企业级智能运营平台</p>
         </div>
       </aside>
 
@@ -127,14 +153,20 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
             <form action="/register/submit" method="post" className="mt-6 space-y-4">
               <label className="block">
                 <span className="text-sm font-medium text-slate-700">姓名 / 昵称</span>
-                <input
-                  name="display_name"
-                  type="text"
-                  required
-                  autoComplete="name"
-                  className="mt-2 h-11 w-full rounded-md border border-border-strong bg-surface px-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
-                  placeholder="运营同学"
-                />
+                <span className="relative mt-2 block">
+                  <User
+                    className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
+                    aria-hidden="true"
+                  />
+                  <input
+                    name="display_name"
+                    type="text"
+                    required
+                    autoComplete="name"
+                    className="h-11 w-full rounded-md border border-border-strong bg-surface pl-9 pr-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
+                    placeholder="运营"
+                  />
+                </span>
               </label>
 
               <label className="block">
@@ -156,7 +188,10 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
               </label>
 
               <label className="block">
-                <span className="text-sm font-medium text-slate-700">密码</span>
+                <span className="flex items-baseline justify-between">
+                  <span className="text-sm font-medium text-slate-700">密码</span>
+                  <span className="text-xs text-slate-500">至少 6 位</span>
+                </span>
                 <span className="relative mt-2 block">
                   <LockKeyhole
                     className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
@@ -169,13 +204,16 @@ export default async function RegisterPage({ searchParams }: RegisterPageProps) 
                     minLength={6}
                     autoComplete="new-password"
                     className="h-11 w-full rounded-md border border-border-strong bg-surface pl-9 pr-3 text-sm text-foreground outline-none transition placeholder:text-slate-500 focus:border-brand-500 focus:ring-4 focus:ring-brand-100"
-                    placeholder="至少 6 位"
+                    placeholder="设置登录密码"
                   />
                 </span>
               </label>
 
               <label className="block">
-                <span className="text-sm font-medium text-slate-700">确认密码</span>
+                <span className="flex items-baseline justify-between">
+                  <span className="text-sm font-medium text-slate-700">确认密码</span>
+                  <span className="text-xs text-slate-500">两次输入需一致</span>
+                </span>
                 <span className="relative mt-2 block">
                   <LockKeyhole
                     className="pointer-events-none absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500"
