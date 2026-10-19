@@ -8,12 +8,20 @@ import {
   Sparkles,
   Check,
   AlertCircle,
+  Eye,
 } from "lucide-react";
 import Link from "next/link";
 
 type LoginPageProps = {
   searchParams?: Promise<Record<string, string | string[] | undefined>>;
 };
+
+/** 演示账号：点击卡片即以对应角色登录，直观展示 RBAC 权限差异；密码统一为 demo123456。 */
+const DEMO_ACCOUNTS = [
+  { email: "owner@example.com", label: "管理员", icon: ShieldCheck },
+  { email: "operator@example.com", label: "运营", icon: BarChart3 },
+  { email: "viewer@example.com", label: "只读", icon: Eye },
+];
 
 /** 登录页品牌标识：与顶栏保持一致，避免分屏下两套品牌语言。 */
 function BrandMark() {
@@ -174,6 +182,38 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
             <Link href="/register" className="text-sm text-brand-600 transition hover:text-brand-700">
               还没有账号？注册
             </Link>
+          </div>
+
+          {/* 演示账号卡片：一键以不同角色登录，直观展示 RBAC 权限差异 */}
+          <div className="mt-7 border-t border-border-strong pt-5">
+            <div className="flex items-center justify-between">
+              <span className="eyebrow text-brand-500">演示账号</span>
+              <span className="text-[11px] text-slate-400">密码统一 · demo123456</span>
+            </div>
+            <p className="mt-1.5 text-xs leading-relaxed text-slate-500">
+              点击卡片即可登录，体验不同角色的权限差异。
+            </p>
+            <div className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-3">
+              {DEMO_ACCOUNTS.map((account) => {
+                const Icon = account.icon;
+                return (
+                  <form key={account.email} action="/login/submit" method="post">
+                    <input type="hidden" name="email" value={account.email} />
+                    <input type="hidden" name="password" value="demo123456" />
+                    <button
+                      type="submit"
+                      className="group flex w-full flex-col items-start gap-1 rounded-lg border border-border-strong bg-surface px-3 py-2.5 text-left transition hover:border-brand-500 hover:bg-brand-50/50 hover:shadow-sm active:translate-y-px"
+                    >
+                      <span className="flex items-center gap-1.5">
+                        <Icon className="h-3.5 w-3.5 text-brand-500" aria-hidden="true" />
+                        <span className="text-xs font-semibold text-foreground">{account.label}</span>
+                      </span>
+                      <span className="text-[10px] text-slate-400">{account.email}</span>
+                    </button>
+                  </form>
+                );
+              })}
+            </div>
           </div>
         </div>
       </section>
