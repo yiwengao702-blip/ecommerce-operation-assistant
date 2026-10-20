@@ -187,7 +187,7 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
           {/* 演示账号卡片：一键以不同角色登录，直观展示 RBAC 权限差异 */}
           <div className="mt-7 border-t border-border-strong pt-5">
             <div className="flex items-center justify-between">
-              <span className="eyebrow text-brand-500">演示账号</span>
+              <span className="eyebrow text-brand-500">演示账号 · 三角色一键体验</span>
               <span className="text-[11px] text-slate-400">密码统一 · demo123456</span>
             </div>
             <p className="mt-1.5 text-xs leading-relaxed text-slate-500">
