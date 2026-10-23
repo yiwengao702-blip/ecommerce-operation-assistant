@@ -49,7 +49,7 @@ def generate_video_asset(
     settings = settings or get_runtime_settings()
     if not is_video_generation_configured(settings):
         raise VideoGenerationNotConfiguredError("Video generation provider is not configured.")
-    if settings.video_provider not in {"dashscope", "jimeng"}:
+    if settings.video_provider not in {"dashscope", "jimeng", "siliconflow"}:
         raise VideoGenerationNotConfiguredError(
             f"Unsupported video provider: {settings.video_provider}. "
             "This provider can be saved in settings, but its generation adapter is not implemented yet."
@@ -60,7 +60,12 @@ def generate_video_asset(
     # 视频生成保留 workflow 元数据，方便运营复核参考图、字幕和配音，不把结果做成只读黑盒。
     prompt = _sanitize_video_prompt(_video_prompt(creative_plan))
     workflow = _video_workflow(creative_plan)
-    if settings.video_provider == "jimeng":
+    if settings.video_provider == "siliconflow":
+        # 硅基流动：submit 拿 requestId，再轮询 status 取最终视频地址。
+        task_id = create_siliconflow_video_task(prompt, settings, workflow=workflow)
+        result = poll_siliconflow_video_task(task_id, settings)
+        video_url = _extract_siliconflow_video_url(result)
+    elif settings.video_provider == "jimeng":
         task_id = create_jimeng_video_task(prompt, settings, workflow=workflow)
         result = poll_jimeng_video_task(task_id, settings)
         video_url = _extract_jimeng_video_url(result)
@@ -247,6 +252,103 @@ def _aspect_ratio_from_size(size: str) -> str:
         "21:9": 21 / 9,
     }
     return min(candidates, key=lambda item: abs(candidates[item] - ratio))
+
+
+def _siliconflow_video_headers(settings: Settings) -> dict[str, str]:
+    """硅基流动视频接口的鉴权头：与 LLM 一致，走 Bearer token。"""
+    return {
+        "Authorization": f"Bearer {settings.video_api_key}",
+        "Content-Type": "application/json",
+    }
+
+
+def create_siliconflow_video_task(
+    prompt: str,
+    settings: Settings,
+    workflow: dict[str, Any] | None = None,
+) -> str:
+    """硅基流动创建文生视频任务，返回 requestId 供后续轮询。"""
+    workflow = workflow or {}
+    payload: dict[str, Any] = {
+        "model": settings.video_model,
+        "prompt": prompt,
+        # 设置里写的是 "1280*720"，该接口要 "1280x720"
+        "image_size": settings.video_size.replace("*", "x"),
+    }
+    reference_images = workflow.get("reference_images") or []
+    if reference_images:
+        # 传了参考图即走图生视频（I2V）模型能力，接口字段为 image。
+        payload["image"] = reference_images[0]
+
+    url = _join_base_url(settings.video_base_url or "", "video/submit")
+    try:
+        with httpx.Client(timeout=120) as client:
+            response = client.post(url, headers=_siliconflow_video_headers(settings), json=payload)
+            response.raise_for_status()
+            data = response.json()
+    except httpx.HTTPStatusError as exc:
+        raise VideoGenerationError(
+            f"SiliconFlow video submit failed: {exc.response.text[:300]}"
+        ) from exc
+    except httpx.HTTPError as exc:
+        raise VideoGenerationError(f"SiliconFlow video submit error: {exc}") from exc
+
+    request_id = (
+        data.get("requestId")
+        or data.get("request_id")
+        or (data.get("data") or {}).get("requestId")
+    )
+    if not isinstance(request_id, str) or not request_id:
+        raise VideoGenerationError("SiliconFlow video response did not contain requestId.")
+    return request_id
+
+
+def poll_siliconflow_video_task(request_id: str, settings: Settings) -> dict[str, Any]:
+    """轮询硅基流动视频任务，直到成功、失败或超时。"""
+    url = _join_base_url(settings.video_base_url or "", "video/status")
+    max_attempts = max(settings.video_poll_max_attempts, 1)
+    interval = max(settings.video_poll_interval_seconds, 1)
+
+    for _attempt in range(max_attempts):
+        try:
+            with httpx.Client(timeout=30) as client:
+                response = client.post(
+                    url,
+                    headers=_siliconflow_video_headers(settings),
+                    json={"requestId": request_id},
+                )
+                response.raise_for_status()
+                data = response.json()
+        except httpx.HTTPStatusError as exc:
+            raise VideoGenerationError(
+                f"SiliconFlow video status failed: {exc.response.text[:300]}"
+            ) from exc
+        except httpx.HTTPError as exc:
+            raise VideoGenerationError(f"SiliconFlow video status error: {exc}") from exc
+
+        status = str(data.get("status") or "").strip().lower()
+        if status in {"succeed", "success", "succeeded", "completed", "finished"}:
+            return data
+        if status in {"failed", "error", "canceled", "cancelled"}:
+            detail = data.get("reason") or status
+            raise VideoGenerationError(f"SiliconFlow video task ended with status: {detail}")
+        time.sleep(interval)
+
+    raise VideoGenerationError("SiliconFlow video task timed out.")
+
+
+def _extract_siliconflow_video_url(result: dict[str, Any]) -> str:
+    """从硅基流动 status 结果里取视频地址（results.videos[].url）。"""
+    results = result.get("results") or {}
+    videos = results.get("videos") or []
+    for item in videos:
+        if isinstance(item, dict) and item.get("url"):
+            return str(item["url"])
+    # 兼容只返回单个 video 对象的实现
+    single = results.get("video")
+    if isinstance(single, dict) and single.get("url"):
+        return str(single["url"])
+    raise VideoGenerationError("SiliconFlow video response did not contain a video url.")
 
 
 def create_dashscope_video_task(

@@ -50,7 +50,7 @@ def generate_main_image_asset(
     settings = settings or get_runtime_settings()
     if not is_image_generation_configured(settings):
         raise ImageGenerationNotConfiguredError("Image generation provider is not configured.")
-    if settings.image_provider not in {"dashscope", "jimeng"}:
+    if settings.image_provider not in {"dashscope", "jimeng", "siliconflow"}:
         raise ImageGenerationNotConfiguredError(
             f"Unsupported image provider: {settings.image_provider}"
         )
@@ -59,7 +59,12 @@ def generate_main_image_asset(
 
     # 生成前清洗 prompt，减少不可见字符和特殊货币符号导致供应商接口解析失败的概率。
     prompt = _sanitize_image_prompt(_main_image_prompt(creative_plan))
-    if settings.image_provider == "jimeng":
+    if settings.image_provider == "siliconflow":
+        # 硅基流动走 OpenAI 兼容的同步文生图接口，直接返回图片 URL，无需轮询任务。
+        result = _create_siliconflow_image(prompt, settings)
+        task_id = str(result.get("request_id", "") or "")
+        image_url = _extract_siliconflow_image_url(result)
+    elif settings.image_provider == "jimeng":
         task_id = _create_jimeng_image_task(prompt, settings)
         result = _poll_jimeng_image_task(task_id, settings)
         image_url = _extract_jimeng_image_url(result)
@@ -87,6 +92,46 @@ def generate_main_image_asset(
         "url": public_path,
         "created_at": int(time.time()),
     }
+
+
+def _create_siliconflow_image(prompt: str, settings: Settings) -> dict[str, Any]:
+    """硅基流动（OpenAI 兼容）同步文生图：单次请求直接返回图片 URL，无需任务轮询。"""
+    # 尺寸沿用设置里的 "1024*1024" 写法，接口要求 "1024x1024"，这里统一归一化。
+    width, height = _parse_image_size(settings.image_size)
+    url = _join_base_url(settings.image_base_url or "", "images/generations")
+    payload: dict[str, Any] = {
+        "model": settings.image_model,
+        "prompt": prompt,
+        "image_size": f"{width}x{height}",
+        "batch_size": 1,
+    }
+    try:
+        with httpx.Client(timeout=180) as client:
+            response = client.post(
+                url,
+                headers={
+                    "Authorization": f"Bearer {settings.image_api_key}",
+                    "Content-Type": "application/json",
+                },
+                json=payload,
+            )
+            response.raise_for_status()
+            return response.json()
+    except httpx.HTTPStatusError as exc:
+        raise ImageGenerationError(
+            f"SiliconFlow image request failed: {exc.response.text[:300]}"
+        ) from exc
+    except httpx.HTTPError as exc:
+        raise ImageGenerationError(f"SiliconFlow image request error: {exc}") from exc
+
+
+def _extract_siliconflow_image_url(result: dict[str, Any]) -> str:
+    """从硅基流动返回的 images/data 数组里取第一张图地址（兼容 OpenAI 格式）。"""
+    images = result.get("images") or result.get("data") or []
+    for item in images:
+        if isinstance(item, dict) and item.get("url"):
+            return str(item["url"])
+    raise ImageGenerationError("SiliconFlow image response did not contain an image url.")
 
 
 def _create_jimeng_image_task(prompt: str, settings: Settings) -> str:
